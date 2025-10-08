@@ -7,9 +7,11 @@ const FILES_TO_CACHE =[
 
     //Pages 
     "/DingleAnimation_AnPhiastAnSpiaire/index.html",
+    "/DingleAnimation_AnPhiastAnSpiaire/puzzlePage.html",
 
     //Scripts
     "/DingleAnimation_AnPhiastAnSpiaire/main.js",
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/puzzleScript.js",
 
     //StyleSheets
     "/DingleAnimation_AnPhiastAnSpiaire/assets/style/stylesheet.css",
