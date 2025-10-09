@@ -6,14 +6,14 @@
  
 window.onload = function (){
 
+    //VARIABLES:
     //Set up the Canvas variable 
-        const canvas = document.getElementById("puzzleCanvas"); 
-        const context = canvas.getContext("2d"); 
-
+    const canvas = document.getElementById("puzzleCanvas"); 
+    const context = canvas.getContext("2d"); 
 
     //Background image 
     let backgroundImage = new Image(); 
-    backgroundImage.src = "assets/images/temporaryBG_Puzzle1.jpg"; 
+    backgroundImage.src = "assets/images/temporaryBG_Puzzle1.jpg"; // Will be changed out for our own assets 
 
     // Timer 
     let timerWidth = 300; 
@@ -23,6 +23,26 @@ window.onload = function (){
     let timerLastUpdate = Date.now(); //start of the timer 
     let timerSpeed = 0.5 // make timer go slower
 
+    //An Phiast for now 
+    let phiastX = 400;
+    let phiastY = 300; 
+    let phiastSpeed = 5; 
+
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    //EVENT LISTENERS
+    let keys = {};
+
+    window.addEventListener("keydown", function(e) {
+        keys[e.key] = true;
+    });
+
+    window.addEventListener("keyup", function(e) {
+        keys[e.key] = false;
+    });
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    //FUNCTIONS: 
     function drawTimer(){       
         // Draw the background
         context.fillStyle = "#000000";
@@ -49,6 +69,9 @@ window.onload = function (){
         this.height = height; 
     }
 
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    //DRAW AND UPATE
     //Draws the images on the canvas 
     function draw(){
         //Clearing space 
@@ -60,14 +83,13 @@ window.onload = function (){
         //Timer
         drawTimer();
 
-        //Square
-        context.fillStyle ="red";
-        context.fillRect(20, 20, 20, 20 ); 
+        //"An Phiast"
+        context.fillStyle ="green";
+        context.fillRect(phiastX, phiastY, 100, 140 ); 
     }
 
-    //Checks user input
-    function update(){
-       //Timer 
+    //Updates timer
+    function updateTimer(){
         let now = Date.now(); 
         let passed = (now - timerLastUpdate) / 1000; // how many seconds have passed
 
@@ -77,11 +99,37 @@ window.onload = function (){
             timerVal = timerMax // ends timer at the max valu
         }
         timerLastUpdate = now; 
-        
-
-        
     }
 
+    //Player Movement
+    function playerMovement(){
+        //Response to keys
+        if (keys["ArrowUp"] || keys["w"]) {
+            phiastY -= phiastSpeed;
+        }
+        if (keys["ArrowDown"] || keys["s"]) {
+            phiastY += phiastSpeed;
+        }
+        if (keys["ArrowLeft"] || keys["a"]) {
+            phiastX -= phiastSpeed;
+        }
+        if (keys["ArrowRight"] || keys["d"]) {
+            phiastX += phiastSpeed;
+        }
+    }
+
+
+    //Checks user input
+    function update(){
+       //Timer 
+        updateTimer();
+
+        //Player Movement
+        playerMovement(); 
+    }
+
+    //------------------------------------------------------------------------------------------------------------------------------------------------
+    //GAME LOOP
     function gameLoop(){
         update();
         draw();
@@ -91,3 +139,4 @@ window.onload = function (){
     window.requestAnimationFrame(gameLoop);
 
 }
+ 
