@@ -15,12 +15,27 @@ window.onload = function (){
     let backgroundImage = new Image(); 
     backgroundImage.src = "assets/images/temporaryBG_Puzzle1.jpg"; // Will be changed out for our own assets 
 
+    //Tree 
+    let treeImage = new Image(); 
+    treeImage.src = "assets/images/tree_Puzzle1.png"; // Will be changed out for our own assets 
+    let tree = new GameObject(treeImage, 20, 40, 500, 480); 
+
+    //Decoy Cow 
+    let decoyCowImage = new Image();
+    decoyCowImage.src = "assets/images/decoyCow_Puzzle1.png"; //Will be changed out for our own assets 
+    let decoyCow = new GameObject(decoyCowImage, 500, 270, 300, 300); 
+
+    //Bush 
+    let bushImage = new Image();
+    bushImage.src = "assets/images/bush_Puzzle1.png"; // Will be changed out for our own assets 
+    let bush = new GameObject(bushImage, 900, 190, 560, 460); 
+
     // Timer 
     let timerWidth = 300; 
     let timerHeight = 50; 
     let timerMax = 300;
     let timerVal = 0.5; // where the timer is in the loop for the draw function 
-    let timerLastUpdate = Date.now(); //start of the timer 
+    let timerLastUpdate = Date.now(); //start of the timer d
     let timerSpeed = 0.5 // make timer go slower
 
     //An Phiast for now 
@@ -80,12 +95,21 @@ window.onload = function (){
         //Background image 
         context.drawImage(backgroundImage, 0, 0, 1500, 700); 
 
+        //Objects
+        context.drawImage(tree.spritesheet, tree.x, tree.y, tree.width, tree.height);
+        context.drawImage(decoyCow.spritesheet, decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height); 
+        context.drawImage(bush.spritesheet, bush.x, bush.y, bush.width, bush.height); 
+
         //Timer
         drawTimer();
 
         //"An Phiast"
+        context.beginPath();
+        context.arc(phiastX, phiastY, 60, 0, 2*Math.PI);
         context.fillStyle ="green";
-        context.fillRect(phiastX, phiastY, 100, 140 ); 
+        context.fill(); 
+        context.strokeStyle ="green";
+        context.stroke();
     }
 
     //Updates timer
@@ -105,16 +129,24 @@ window.onload = function (){
     function playerMovement(){
         //Response to keys
         if (keys["ArrowUp"] || keys["w"]) {
-            phiastY -= phiastSpeed;
+            if (phiastY-60 >= 0){
+                phiastY -= phiastSpeed;
+            }
         }
         if (keys["ArrowDown"] || keys["s"]) {
-            phiastY += phiastSpeed;
+            if (phiastY <= canvas.height - 60){
+                phiastY += phiastSpeed;
+            }
         }
         if (keys["ArrowLeft"] || keys["a"]) {
-            phiastX -= phiastSpeed;
+            if(phiastX-60 >=0){
+                phiastX -= phiastSpeed;
+            }
         }
         if (keys["ArrowRight"] || keys["d"]) {
-            phiastX += phiastSpeed;
+            if(phiastX <= canvas.width-60){
+                phiastX += phiastSpeed;
+            }
         }
     }
 
