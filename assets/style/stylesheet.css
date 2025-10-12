@@ -1,25 +1,14 @@
-<<<<<<< HEAD
 /* Global Stylesheet 
     Author: Caoimhe O'Brien, Aoife Leahy and Natalia Ryl 
     Date: 08/10/2025
 
-    Styles for: 
-    Index (opening page) 
+    Styles for:
+    Index (opening page)
     Puzzle Page
 */
 /*----------------------------------------------------------------------------------------------------------------------------------------------*/
 /*INDEX STYLES*/ 
-
-/*----------------------------------------------------------------------------------------------------------------------------------------------*/
-/*PUZZLE PAGE STYLES*/
-#canvasDiv{
-    margin-top: 2%;
-    margin-left: 10%;
-}
-
-/*----------------------------------------------------------------------------------------------------------------------------------------------*/
-=======
-  html, body { 
+html, body { 
     margin: 0;
     padding: 0;
     height: 100%;
@@ -33,11 +22,11 @@
     font-size: 70px;
     color: #348a47;
     font-family: fantasy;
-   text-shadow: 
+    text-shadow: 
         -2px -2px 0 #000000,  
-         2px -2px 0 #000,  
+        2px -2px 0 #000,  
         -2px  2px 0 #000,  
-         2px  2px 0 #000,
+        2px  2px 0 #000,
          0px  0px 3px #000; /* optional blur */
 }
 
@@ -48,7 +37,6 @@
 
 button {
     background-color: #348a47;
-    
     position: sticky;
     color: white;
     font-size: 60px;
@@ -61,7 +49,26 @@ button {
 }
 
 button:hover {
-     background-color: #3ea374;
+    background-color: #3ea374;
 }
->>>>>>> origin
+
+#AnPhiast{
+    position: fixed;  
+    top: 8%; 
+    right: 800px; 
+    width: 1300px; 
+    height: 1000px; 
+    z-index: 1;
+
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*PUZZLE PAGE STYLES*/
+#canvasDiv{
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+
 
