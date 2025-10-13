@@ -36,7 +36,7 @@ window.onload = function (){
     let timerMax = 300;
     let timerVal = 0.5; // where the timer is in the loop for the draw function 
     let timerLastUpdate = Date.now(); //start of the timer d
-    let timerSpeed = 0.5 // make timer go slower
+    let timerSpeed = 1; // make timer go slower
 
     //An Phiast for now 
     let phiastX = 400;
@@ -61,18 +61,18 @@ window.onload = function (){
     function drawTimer(){       
         // Draw the background
         context.fillStyle = "#000000";
-        context.clearRect(900, 2, timerWidth,timerHeight);
-        context.fillRect(900, 2, timerWidth, timerHeight);
+        context.clearRect(1100, 2, timerWidth,timerHeight);
+        context.fillRect(1100, 2, timerWidth, timerHeight);
 
         // Draw the fill
         context.fillStyle = "#9CADCE";
         var fillVal = Math.min(Math.max(timerVal / timerMax, 0), 1);
-        context.fillRect(900, 2, fillVal * timerWidth, timerHeight);
+        context.fillRect(1100, 2, fillVal * timerWidth, timerHeight);
 
         // Draw frame 
         context.strokeStyle = "#EBD57C";
         context.lineWidth = 4; 
-        context.strokeRect(898, 0, timerWidth + 1, timerHeight + 1); 
+        context.strokeRect(1098, 0, timerWidth + 1, timerHeight + 1); 
     }
 
     //Turns images into an object in the game so that it doesn't loose its 
@@ -150,7 +150,10 @@ window.onload = function (){
         }
     }
 
-
+    //Object Boundary checking 
+    function objectCollision(){
+        if(phiast){}
+    }
     //Checks user input
     function update(){
        //Timer 
