@@ -15,6 +15,8 @@ window.onload = function (){
     let backgroundImage = new Image(); 
     backgroundImage.src = "assets/images/temporaryBG_Puzzle1.jpg"; // Will be changed out for our own assets 
 
+
+    //OBJECTS 
     //Tree 
     let treeImage = new Image(); 
     treeImage.src = "assets/images/tree_Puzzle1.png"; // Will be changed out for our own assets 
@@ -38,11 +40,11 @@ window.onload = function (){
     let timerLastUpdate = Date.now(); //start of the timer d
     let timerSpeed = 0.5 // make timer go slower
 
-    //An Phiast for now 
-    let phiastX = 400;
-    let phiastY = 300; 
-    let phiastSpeed = 5; 
-
+    //An Phiast
+    let phiastImage = new Image();
+    phiastImage.src = "assets/images/AnPhiastHand.png";
+    let phiast = new GameObject(phiastImage, 20, 20, 300, 900);
+    let phiastSpeed = 10;
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //EVENT LISTENERS
@@ -79,8 +81,8 @@ window.onload = function (){
     function GameObject(spritesheet, x, y, width, height){
         this.spritesheet = spritesheet;
         this.x = x;
-        this.y = y; 
-        this.width = width; 
+        this.y = y;
+        this.width = width;
         this.height = height; 
     }
 
@@ -104,12 +106,7 @@ window.onload = function (){
         drawTimer();
 
         //"An Phiast"
-        context.beginPath();
-        context.arc(phiastX, phiastY, 60, 0, 2*Math.PI);
-        context.fillStyle ="green";
-        context.fill(); 
-        context.strokeStyle ="green";
-        context.stroke();
+        context.drawImage(phiast.spritesheet, phiast.x, phiast.y, phiast.width, phiast.height);
     }
 
     //Updates timer
@@ -129,23 +126,23 @@ window.onload = function (){
     function playerMovement(){
         //Response to keys
         if (keys["ArrowUp"] || keys["w"]) {
-            if (phiastY-60 >= 0){
-                phiastY -= phiastSpeed;
+            if (phiast.y-60 >= 0){
+                phiast.y -= phiastSpeed;
             }
         }
         if (keys["ArrowDown"] || keys["s"]) {
-            if (phiastY <= canvas.height - 60){
-                phiastY += phiastSpeed;
+            if (phiast.y <= canvas.height - 60){
+                phiast.y += phiastSpeed;
             }
         }
         if (keys["ArrowLeft"] || keys["a"]) {
-            if(phiastX-60 >=0){
-                phiastX -= phiastSpeed;
+            if(phiast.x-60 >=0){
+                phiast.x -= phiastSpeed;
             }
         }
         if (keys["ArrowRight"] || keys["d"]) {
-            if(phiastX <= canvas.width-60){
-                phiastX += phiastSpeed;
+            if(phiast.x <= canvas.width-60){
+                phiast.x += phiastSpeed;
             }
         }
     }
@@ -171,4 +168,3 @@ window.onload = function (){
     window.requestAnimationFrame(gameLoop);
 
 }
- 

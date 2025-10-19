@@ -5,6 +5,8 @@
     Styles for:
     Index (opening page)
     Puzzle Page
+    Menu Page
+    Cut Scene Page
 */
 /*----------------------------------------------------------------------------------------------------------------------------------------------*/
 /*INDEX STYLES*/ 
@@ -15,8 +17,8 @@ html, body {
     }
 
     h1{
-    padding-top: 4rem;
-    padding-left: 40rem;
+    padding-top: 2%;
+    padding-left: 30%;
     position: fixed;
     text-align: center;
     font-size: 70px;
@@ -31,8 +33,10 @@ html, body {
 }
 
 #startButton{
-    padding-top: 20rem;
-    padding-left: 2rem;
+    padding: 0.5rem; 
+    margin-left: 45%;
+    margin-top: 15%;  
+    position: fixed;
 }
 
 button {
@@ -41,7 +45,6 @@ button {
     color: white;
     font-size: 60px;
     padding: 10px 20px;
-    margin-left: 870px; /* <-- this causes the shift */
     border-color: black;
     cursor: pointer;
     border-radius: 15px;
@@ -52,6 +55,8 @@ button:hover {
     background-color: #3ea374;
 }
 
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*MENU PAGE STYLES*/ 
 #restart {
     all: unset; /* clears inherited global button styles */
     display: inline-block;
@@ -122,4 +127,11 @@ button:hover {
 
 #musicSlider {
     cursor: pointer;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*PUZZLE PAGE STYLES*/
+#canvasDiv{
+    margin-top: 2%;
+    margin-left: 10%;
 }
