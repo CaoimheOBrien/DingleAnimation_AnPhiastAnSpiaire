@@ -13,7 +13,7 @@ window.onload = function (){
 
     //Background image 
     let backgroundImage = new Image(); 
-    backgroundImage.src = "assets/images/temporaryBG_Puzzle1.jpg"; // Will be changed out for our own assets 
+    backgroundImage.src = "assets/images/fieldBG_Puzzle1.png"; // Will be changed out for our own assets 
 
 
     //OBJECTS 
@@ -45,7 +45,7 @@ window.onload = function (){
     phiastImage.src = "assets/images/AnPhiastHand.png";
     let phiast = new GameObject(phiastImage, 20, 20, 300, 900);
     let phiastSpeed = 10;
-
+    
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //EVENT LISTENERS
     let keys = {};
@@ -86,6 +86,31 @@ window.onload = function (){
         this.height = height; 
     }
 
+    let canClick = false;
+    let treeClicked = false;
+
+
+    // Collision detection -- if the hand collides with the any of the objects, the player has to press enter/ double tap for mobile, to check behind the object
+    function CollisionDetection(){
+        let phiastPadding = 2;
+        let phiastLeft = phiast.x + phiastPadding; 
+        let phiastRight = phiast.x+ phiast.width;
+        let phiastTop = phiast.y + phiastPadding;
+
+        if (!treeClicked){
+            const isTreeColliding = 
+                phiastRight >= tree.x &&
+                phiastLeft <= tree.x + tree.width &&
+                phiastTop >= tree.y &&
+                phiastTop <= tree.y +tree.height;
+
+            canClick = isTreeColliding; 
+        }
+        else{
+            canClick = false; 
+        }
+    }
+
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //DRAW AND UPATE
@@ -98,7 +123,9 @@ window.onload = function (){
         context.drawImage(backgroundImage, 0, 0, 1500, 700); 
 
         //Objects
-        context.drawImage(tree.spritesheet, tree.x, tree.y, tree.width, tree.height);
+        if(treeClicked === false){
+            context.drawImage(tree.spritesheet, tree.x, tree.y, tree.width, tree.height);
+        }
         context.drawImage(decoyCow.spritesheet, decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height); 
         context.drawImage(bush.spritesheet, bush.x, bush.y, bush.width, bush.height); 
 
@@ -107,6 +134,13 @@ window.onload = function (){
 
         //"An Phiast"
         context.drawImage(phiast.spritesheet, phiast.x, phiast.y, phiast.width, phiast.height);
+    
+        // Show when you can click on the objects
+        if (canClick){
+            context.fillStyle = "rgba(7, 40, 43, 0.95)";
+            context.font = "20px Arial";
+            context.fillText("Press Enter to look behind the object", tree.x, tree.y - 10);
+        }
     }
 
     //Updates timer
@@ -126,35 +160,44 @@ window.onload = function (){
     function playerMovement(){
         //Response to keys
         if (keys["ArrowUp"] || keys["w"]) {
-            if (phiast.y-60 >= 0){
+            if (phiast.y-20 >= 0){
                 phiast.y -= phiastSpeed;
             }
         }
         if (keys["ArrowDown"] || keys["s"]) {
-            if (phiast.y <= canvas.height - 60){
+            if (phiast.y <= canvas.height - 250){
                 phiast.y += phiastSpeed;
             }
         }
         if (keys["ArrowLeft"] || keys["a"]) {
-            if(phiast.x-60 >=0){
+            if(phiast.x >= -20){
                 phiast.x -= phiastSpeed;
             }
         }
         if (keys["ArrowRight"] || keys["d"]) {
-            if(phiast.x <= canvas.width-60){
+            if(phiast.x <= canvas.width-20){
                 phiast.x += phiastSpeed;
             }
         }
     }
 
+    document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter" && canClick === true && tree) {
+        treeClicked = true; // Remove the tree from the game
+        canClick = false; // Waits until you collide again to click 
+    }
+});
 
     //Checks user input
     function update(){
-       //Timer 
+        //Timer
         updateTimer();
 
         //Player Movement
-        playerMovement(); 
+        playerMovement();
+
+        //Collision detection
+        CollisionDetection();
     }
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -162,6 +205,7 @@ window.onload = function (){
     function gameLoop(){
         update();
         draw();
+
         window.requestAnimationFrame(gameLoop);
     }
     
