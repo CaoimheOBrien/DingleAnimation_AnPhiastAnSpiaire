@@ -11,7 +11,7 @@ const context = canvas.getContext("2d");
 
 //Background image 
 let backgroundImage = new Image(); 
-backgroundImage.src = "assets/images/field.png"; // Will be changed out for our own assets 
+backgroundImage.src = "assets/images/fieldBG.png";
 
 //Phiast images
 let phiastFrontImage = new Image();
