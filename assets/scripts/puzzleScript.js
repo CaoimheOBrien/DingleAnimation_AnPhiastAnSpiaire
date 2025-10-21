@@ -25,7 +25,7 @@ window.onload = function (){
     //Decoy Cow 
     let decoyCowImage = new Image();
     decoyCowImage.src = "assets/images/decoyCow_Puzzle1.png"; 
-    let decoyCow = new GameObject(decoyCowImage, 570, 270, 300, 300); 
+    let decoyCow = new GameObject(decoyCowImage, 550, 270, 300, 300); 
 
     //Bush 
     let bushImage = new Image();
@@ -43,7 +43,7 @@ window.onload = function (){
     let timerMax = 300;
     let timerVal = 0.5; // where the timer is in the loop for the draw function 
     let timerLastUpdate = Date.now(); //start of the timer d
-    let timerSpeed = 1; // make timer go slower
+    let timerSpeed = 10; // make timer go slower
 
     //An Phiast
     let phiastImage = new Image();
@@ -69,7 +69,7 @@ window.onload = function (){
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //FUNCTIONS: 
-    function drawTimer(){       
+    function drawTimer(){
         // Draw the background
         context.fillStyle = "#000000";
         context.clearRect(1100, 2, timerWidth,timerHeight);
@@ -100,17 +100,20 @@ window.onload = function (){
     let canClick = false;
     let treeClicked = false;
     let decoyCowClicked = false;
-    let bushClicked = false; 
+    let bushClicked = false;
     let decoyCowSelected = false;
     let treeSelected = false;
-    let bushSelected = false; 
+    let bushSelected = false;
+    let realCowSelected = false;
+    let realCowClicked = false;
+    let winGame = false;
+    let looseGame = false; 
 
     // Collision detection -- if the hand collides with the any of the objects, the player has to press enter/ double tap for mobile, to check behind the object
     function CollisionDetection(){
-        let phiastPadding = 2;
-        let phiastLeft = phiastFinger.x + phiastPadding;
-        let phiastRight = phiastFinger.x+ phiast.width;
-        let phiastTop = phiastFinger.y + phiastPadding;
+        let phiastLeft = phiastFinger.x;
+        let phiastRight = phiastFinger.x+ phiastFinger.width;
+        let phiastTop = phiastFinger.y;
 
         // Has the tree been clicked?
         const isTreeColliding =
@@ -119,10 +122,11 @@ window.onload = function (){
             phiastTop >= tree.y &&
             phiastTop <= tree.y +tree.height;
 
+        
         treeSelected = isTreeColliding;
 
         // Has the decoy cow been clicked
-        const isDecoyCowColliding = 
+        const isDecoyCowColliding =
             phiastRight >= decoyCow.x &&
             phiastLeft <= decoyCow.x + decoyCow.width &&
             phiastTop >= decoyCow.y &&
@@ -131,7 +135,7 @@ window.onload = function (){
         decoyCowSelected = isDecoyCowColliding;
 
         //Has the bush been clicked?
-        const isBushColliding = 
+        const isBushColliding =
             phiastRight >= bush.x &&
             phiastLeft <= bush.x + bush.width &&
             phiastTop >= bush.y &&
@@ -139,7 +143,20 @@ window.onload = function (){
 
         bushSelected = isBushColliding;
 
-        canClick = treeSelected || decoyCowSelected || bushSelected;
+        // Has the real Cow been clicked?
+        const isRealCowColliding = bushClicked === true &&
+            phiastRight >= realCow.x &&
+            phiastLeft <= realCow.x + realCow.width &&
+            phiastTop >= realCow.y &&
+            phiastTop <= realCow.y + realCow.height;
+
+        realCowSelected = isRealCowColliding;
+
+        if (realCowSelected === true){
+            bushSelected = false;
+        }
+
+        canClick = treeSelected || decoyCowSelected || bushSelected || realCowSelected;
     }
 
 
@@ -154,26 +171,19 @@ window.onload = function (){
         context.drawImage(backgroundImage, 0, 0, 1500, 700);
         
         //Real Cow --> What they are trying to find.
-        context.drawImage(realCow.spritesheet, realCow.x, realCow.y, realCow.width, realCow.height);
-        /*context.strokeStyle = "Yellow";
-        context.strokeRect(realCow.x, realCow.y, realCow.width, realCow.height);*/
-
+        if(!realCowClicked && bushClicked){
+            context.drawImage(realCow.spritesheet, realCow.x, realCow.y, realCow.width, realCow.height);
+        }
+    
         //Objects
         if(!treeClicked){
             context.drawImage(tree.spritesheet, tree.x, tree.y, tree.width, tree.height);
-            /*context.strokeStyle="Green";
-            context.strokeRect(tree.x, tree.y, tree.width, tree.height);*/
         }
         if (!decoyCowClicked){
             context.drawImage(decoyCow.spritesheet, decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height);
-            /*context.strokeStyle = "Red";
-            context.strokeRect(decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height);*/
         }
         if (!bushClicked){
             context.drawImage(bush.spritesheet, bush.x, bush.y, bush.width, bush.height);
-            /* context.strokeStyle = "Blue";
-            context.strokeRect(bush.x, bush.y, bush.width, bush.height);*/
-
         }
         
         //Timer
@@ -181,17 +191,20 @@ window.onload = function (){
 
         //"An Phiast"
         context.drawImage(phiast.spritesheet, phiast.x, phiast.y, phiast.width, phiast.height);
-        /*context.strokeStyle = "Orange";
-        context.strokeRect(phiast.x, phiast.y, phiast.width, phiast.height);*/
-        context.drawImage(phiastFinger.spritesheet, phiastFinger.x, phiastFinger.y, phiastFinger.width, phiastFinger.height); 
-        /*context.strokeStyle = "Purple";
-        context.strokeRect(phiastFinger.x, phiastFinger.y, phiastFinger.width, phiastFinger.height);*/
+        context.drawImage(phiastFinger.spritesheet, phiastFinger.x, phiastFinger.y, phiastFinger.width, phiastFinger.height);
 
         // Show when you can click on the objects
         if (canClick){
-            context.fillStyle = "rgba(7, 40, 43, 0.95)";
-            context.font = "20px Arial";
-            context.fillText("Press Enter to look behind the object", tree.x, tree.y - 10);
+            if (treeSelected || decoyCowSelected || bushSelected){
+                context.fillStyle = "rgba(7, 40, 43, 0.95)";
+                context.font = "20px Arial";
+                context.fillText("Press Enter to look behind the object", tree.x, tree.y - 10);
+            }
+            else if (realCowSelected){
+                context.fillStyle = "rgba(7, 40, 43, 0.95)";
+                context.font = "20px Arial";
+                context.fillText("Press Enter to catch Cow!", tree.x, tree.y - 10);
+            }
         }
     }
 
@@ -203,9 +216,15 @@ window.onload = function (){
         timerVal += passed * timerSpeed; // counts up timer
 
         if (timerVal > timerMax) {
-            timerVal = timerMax // ends timer at the max valu
+            timerVal = timerMax // ends timer at the max value
+            console.log("Timer is up");
         }
-        timerLastUpdate = now; 
+        timerLastUpdate = now;
+
+        if(timerVal == timerMax){
+            looseGame = true; // the timer is up so you have lost the game
+            console.log("Game told to end");
+        }
     }
 
     //Player Movement
@@ -239,19 +258,24 @@ window.onload = function (){
     }
 
     document.addEventListener("keydown", function(event) {
-    if (event.key === "Enter" && canClick === true && (tree || decoyCow || bush)) {
-        if (treeSelected === true){
-            treeClicked = !treeClicked; // Remove the tree from the game
+        if (event.key === "Enter" && canClick === true) {
+            if (treeSelected === true){
+                treeClicked = !treeClicked; // Remove the tree from the game
+            }
+            if (decoyCowSelected === true){
+                decoyCowClicked = !decoyCowClicked;
+            }
+            if (bushSelected === true && !realCowSelected){
+                bushClicked = !bushClicked;
+            }
+            if (realCowSelected === true){
+                realCowClicked = !realCowClicked;
+                winGame = true;
+            }
+            canClick = false; // Waits until you collide again to click
         }
-        if (decoyCowSelected === true){
-            decoyCowClicked = !decoyCowClicked;
-        }
-        if (bushSelected === true){
-            bushClicked = !bushClicked;
-        }
-        canClick = false; // Waits until you collide again to click
-    }
-});
+    });
+
 
     //Checks user input
     function update(){
@@ -268,10 +292,39 @@ window.onload = function (){
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //GAME LOOP
     function gameLoop(){
-        update();
-        draw();
+        if (winGame === false && looseGame === false){
+            update();
+            draw();
+            window.requestAnimationFrame(gameLoop);
+        }
+        else if (winGame=== true){
+            setTimeout(() => {
+                //Clearing space 
+                context.clearRect(0,0, canvas.width, canvas.height)
 
-        window.requestAnimationFrame(gameLoop);
+                //Background image 
+                context.drawImage(backgroundImage, 0, 0, 1500, 700);
+
+                //End Message
+                context.fillStyle = "rgba(7, 40, 43, 0.95)";
+                context.font = "80px Arial";
+                context.fillText("You found Cow!", 200, 200);
+            }, 1000);
+        }
+        else if (looseGame === true){
+            setTimeout(() => {
+                //Clearing space 
+                context.clearRect(0,0, canvas.width, canvas.height)
+
+                //Background image 
+                context.drawImage(backgroundImage, 0, 0, 1500, 700);
+
+                //End Message
+                context.fillStyle = "rgba(7, 40, 43, 0.95)";
+                context.font = "80px Arial";
+                context.fillText("Time's up! Try again!", 200, 200);
+            }, 1000);
+        }
     }
     
     window.requestAnimationFrame(gameLoop);
