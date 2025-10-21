@@ -125,8 +125,8 @@ function startTypingLine(line) {
 function update() {
     // Characters walk in
   if (cutsceneStep === 0) {
-    phiastX += 5;
-    caraX += 5;
+    phiastX += 3;
+    caraX += 3;
     if (phiastX >= 400) {
       phiastX = 400;
       caraX = 270;
@@ -137,13 +137,13 @@ function update() {
 
   // Cow run
   if (currentLineIndex === 4 && !isTyping) {
-    cowX += 50;
+    cowX += 15;
     if (cowX > 4800) cowX = 4800;
   }
 
   if (currentLineIndex === dialogueLines.length - 1 && !isTyping) {
-    phiastX += 10;
-    caraX += 10;
+    phiastX += 5;
+    caraX += 5;
   }
 }
 
@@ -178,8 +178,6 @@ function advanceDialogue() {
       startPuzzle();
     }
   }
-
-
 }
 
 function startPuzzle() {
