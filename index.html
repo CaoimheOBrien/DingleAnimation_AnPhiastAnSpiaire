@@ -24,14 +24,9 @@
         </div>
     
     <script>
-        document.getElementById("startBtn").onclick = function() {
-            goToCutScene();
-        };
-
-        function goToCutScene(){
-            window.location.href = "cutscene1.html";
-        }
+        document.getElementById('startBtn').addEventListener('click', function(){
+            window.location.href='cutscene1.html';
+        })
     </script>
-
     </body>
 </html

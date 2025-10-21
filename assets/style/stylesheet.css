@@ -32,23 +32,23 @@ html, body {
          0px  0px 3px #000; /* optional blur */
 }
 
-#startButtonDiv{
-    padding: 0.5rem; 
-    margin-left: 45%;
-    margin-top: 15%;  
-    position: fixed;
-}
-
 button {
     background-color: #348a47;
-    position: sticky;
     color: white;
     font-size: 60px;
     padding: 10px 20px;
+    position: relative; 
     border-color: black;
     cursor: pointer;
     border-radius: 15px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#startButtonDiv{
+    padding-top: 20%;
+    padding-left: 47%;
+    position: relative;
+    z-index: 10; 
 }
 
 button:hover {
