@@ -13,24 +13,29 @@ window.onload = function (){
 
     //Background image 
     let backgroundImage = new Image(); 
-    backgroundImage.src = "assets/images/fieldBG_Puzzle1.png"; // Will be changed out for our own assets 
+    backgroundImage.src = "assets/images/fieldBG_Puzzle1.png"; 
 
 
     //OBJECTS 
     //Tree 
     let treeImage = new Image(); 
-    treeImage.src = "assets/images/tree_Puzzle1.png"; // Will be changed out for our own assets 
+    treeImage.src = "assets/images/tree_Puzzle1.png"; 
     let tree = new GameObject(treeImage, 10, 30, 500, 480); 
 
     //Decoy Cow 
     let decoyCowImage = new Image();
-    decoyCowImage.src = "assets/images/decoyCow_Puzzle1.png"; //Will be changed out for our own assets 
+    decoyCowImage.src = "assets/images/decoyCow_Puzzle1.png"; 
     let decoyCow = new GameObject(decoyCowImage, 570, 270, 300, 300); 
 
     //Bush 
     let bushImage = new Image();
-    bushImage.src = "assets/images/bush_Puzzle1.png"; // Will be changed out for our own assets 
-    let bush = new GameObject(bushImage, 900, 190, 560, 460); 
+    bushImage.src = "assets/images/bush_Puzzle1.png"; 
+    let bush = new GameObject(bushImage, 900, 190, 560, 460);
+
+    //Real Cow that they're looking for
+    let realCowImage =  new Image();
+    realCowImage.src = "assets/images/cow.png";
+    let realCow = new GameObject(realCowImage, 1060, 240, 200, 375); 
 
     // Timer 
     let timerWidth = 300; 
@@ -147,22 +152,27 @@ window.onload = function (){
 
         //Background image 
         context.drawImage(backgroundImage, 0, 0, 1500, 700);
+        
+        //Real Cow --> What they are trying to find.
+        context.drawImage(realCow.spritesheet, realCow.x, realCow.y, realCow.width, realCow.height);
+        /*context.strokeStyle = "Yellow";
+        context.strokeRect(realCow.x, realCow.y, realCow.width, realCow.height);*/
 
         //Objects
         if(!treeClicked){
             context.drawImage(tree.spritesheet, tree.x, tree.y, tree.width, tree.height);
-            context.strokeStyle="Green";
-            context.strokeRect(tree.x, tree.y, tree.width, tree.height);
+            /*context.strokeStyle="Green";
+            context.strokeRect(tree.x, tree.y, tree.width, tree.height);*/
         }
         if (!decoyCowClicked){
             context.drawImage(decoyCow.spritesheet, decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height);
-            context.strokeStyle = "Red";
-            context.strokeRect(decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height);
+            /*context.strokeStyle = "Red";
+            context.strokeRect(decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height);*/
         }
         if (!bushClicked){
             context.drawImage(bush.spritesheet, bush.x, bush.y, bush.width, bush.height);
-            context.strokeStyle = "Blue";
-            context.strokeRect(bush.x, bush.y, bush.width, bush.height);
+            /* context.strokeStyle = "Blue";
+            context.strokeRect(bush.x, bush.y, bush.width, bush.height);*/
 
         }
         
@@ -171,11 +181,11 @@ window.onload = function (){
 
         //"An Phiast"
         context.drawImage(phiast.spritesheet, phiast.x, phiast.y, phiast.width, phiast.height);
-        context.strokeStyle = "Orange";
-        context.strokeRect(phiast.x, phiast.y, phiast.width, phiast.height);
+        /*context.strokeStyle = "Orange";
+        context.strokeRect(phiast.x, phiast.y, phiast.width, phiast.height);*/
         context.drawImage(phiastFinger.spritesheet, phiastFinger.x, phiastFinger.y, phiastFinger.width, phiastFinger.height); 
-        context.strokeStyle = "Purple";
-    context.strokeRect(phiastFinger.x, phiastFinger.y, phiastFinger.width, phiastFinger.height);
+        /*context.strokeStyle = "Purple";
+        context.strokeRect(phiastFinger.x, phiastFinger.y, phiastFinger.width, phiastFinger.height);*/
 
         // Show when you can click on the objects
         if (canClick){
