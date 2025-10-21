@@ -175,12 +175,20 @@ function advanceDialogue() {
     startTypingLine(dialogueLines[currentLineIndex]);
   } else {
     typedText = "";
-    if (phiastX > 1600) startPuzzle();
+    if (phiastX >= 1600){
+      startPuzzle();
+    }
   }
+
+
 }
 
 function startPuzzle() {
     console.log("Puzzle 1 begins!");
+    setTimeout(() => {
+      window.location.href='puzzlePage.html';
+    }, 2000); 
+
 }
 
 //GAME LOOP
