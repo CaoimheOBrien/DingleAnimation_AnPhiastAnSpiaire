@@ -11,23 +11,20 @@ window.onload = function (){
 
     //--------------------------------------------------------------------------------------------------------------------
     // Background image
-
+    let background = new Image();
+    background.src = "assets/images/Background_AnPhiastCave.png"
     //--------------------------------------------------------------------------------------------------------------------
-    //Turns images into an object in the game so that it doesn't loose its 
-    function GameObject(spritesheet, x, y, width, height){
-        this.spritesheet = spritesheet;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height; 
-    }
-
+    
     function draw(){
+        //Clearing space 
+        context.clearRect(0,0, canvas.width, canvas.height)
+
+        //Background image 
+        context.drawImage(background, 0, 0, 1500, 700);
         
     }
 
     function gameLoop(){
-        update();
         draw();
         window.requestAnimationFrame(gameLoop);
     }
