@@ -13,13 +13,13 @@ const context = canvas.getContext("2d");
 let backgroundImage = new Image(); 
 backgroundImage.src = "assets/images/fieldBG.png";
 
-//Phiast images
-let phiastFrontImage = new Image();
-phiastFrontImage.src = "assets/images/phiast_front.png";
+//Phiast image
+let phiastImage = new Image();
+phiastImage.src = "assets/images/phiast.png";
 
-//Cara images
-let caraFrontImage = new Image();
-caraFrontImage.src = "assets/images/cara_front.png";
+//Cara image
+let caraImage = new Image();
+caraImage.src = "assets/images/cara.png";
 
 //Cow image
 let cowImage = new Image();
@@ -31,7 +31,6 @@ let phiastX = -400; // start off screen left
 let caraX = -530; // start off screen left
 let cowX = -300; // starts off screen right
 
-// let dialogue = "";
 let cutsceneStep = 0;
 let allowInput = false;
 
@@ -62,8 +61,8 @@ function draw(){
     context.drawImage(backgroundImage, 0, 0, 1500, 700); 
 
     //Characters
-    context.drawImage(phiastFrontImage, phiastX, 100, 380, 600);
-    context.drawImage(caraFrontImage, caraX, 350, 180, 250);
+    context.drawImage(phiastImage, phiastX, 100, 380, 600);
+    context.drawImage(caraImage, caraX, 350, 180, 250);
     context.drawImage(cowImage, cowX, 120, 200, 500);
 
     //dialogue box
