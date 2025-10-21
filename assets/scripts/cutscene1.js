@@ -37,13 +37,13 @@ let allowInput = false;
 
 const dialogueLines = [
     "Cara: This is the field. Cow was last seen here.",
-    "An Phiast: Good. If we can find her, we might finally get some answers about St. Cuan.",
-    "Cara: Think she'll talk?",
-    "An Phiast: Only if we find her before she bolts.",
+    "An Phiast: Then we're in the right place. Something's going on between her and Sheep.",
+    "Cara: You think they are working together?",
+    "An Phiast: Maybe.. But we'll need to find Cow first to know for sure.",
     "*A shadow darts across the field...*",
     "Cara: There! That was Cow!",
     "An Phiast: She's hiding. We'll have to search the area.",
-    "Find where Cow is hiding to confront her for information."
+    "Find where Cow is hiding to learn what she and Sheep are planning."
 ];
 
 let currentLineIndex = 0;
