@@ -139,7 +139,7 @@ function update() {
   // Cow run
   if (currentLineIndex === 4 && !isTyping) {
     cowX += 50;
-    if (cowX > 1800) cowX = 1800;
+    if (cowX > 4800) cowX = 4800;
   }
 
   if (currentLineIndex === dialogueLines.length - 1 && !isTyping) {

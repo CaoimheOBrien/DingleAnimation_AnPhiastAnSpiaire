@@ -32,7 +32,7 @@ html, body {
          0px  0px 3px #000; /* optional blur */
 }
 
-#startButton{
+#startButtonDiv{
     padding: 0.5rem; 
     margin-left: 45%;
     margin-top: 15%;  
