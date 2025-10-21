@@ -1,3 +1,23 @@
+/* Global Stylesheet 
+    Author: Caoimhe O'Brien, Aoife Leahy and Natalia Ryl 
+    Date: 08/10/2025
+
+    Styles for: 
+    Index (opening page) 
+    Puzzle Page
+*/
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*INDEX STYLES*/ 
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*PUZZLE PAGE STYLES*/
+#canvasDiv{
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+
   html, body { 
     margin: 0;
     padding: 0;
@@ -27,12 +47,11 @@
 
 button {
     background-color: #348a47;
-    
     position: sticky;
     color: white;
     font-size: 60px;
     padding: 10px 20px;
-    margin-left: 870px;
+    margin-left: 870px; /* <-- this causes the shift */
     border-color: black;
     cursor: pointer;
     border-radius: 15px;
@@ -43,3 +62,74 @@ button:hover {
      background-color: #3ea374;
 }
 
+#restart {
+    all: unset; /* clears inherited global button styles */
+    display: inline-block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 60px;
+    font-size: 2rem;
+    background-color: #348a47; /* your title green */
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 10;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+#restart:hover {
+    background-color: #3ea374; /* slightly lighter green */
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0px 0px 25px rgba(52, 138, 71, 0.8);
+}
+
+#soundEffects {
+    all: unset;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 20px;       /* top of screen */
+    left: 20px;      /* far left */
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #348a47;
+    color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+#soundEffects:hover {
+    background-color: #3ea374;
+    transform: scale(1.05);
+    box-shadow: 0px 0px 15px rgba(52,138,71,0.6);
+}
+
+#musicControl {
+    position: fixed;
+    top: 20px;        /* top of screen */
+    right: 20px;      /* top-right corner */
+    background-color: rgba(52, 138, 71, 0.8);
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 10;
+}
+
+#musicSlider {
+    cursor: pointer;
+}
