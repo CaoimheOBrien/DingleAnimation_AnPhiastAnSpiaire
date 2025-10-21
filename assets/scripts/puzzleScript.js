@@ -20,12 +20,12 @@ window.onload = function (){
     //Tree 
     let treeImage = new Image(); 
     treeImage.src = "assets/images/tree_Puzzle1.png"; // Will be changed out for our own assets 
-    let tree = new GameObject(treeImage, 20, 40, 500, 480); 
+    let tree = new GameObject(treeImage, 10, 30, 500, 480); 
 
     //Decoy Cow 
     let decoyCowImage = new Image();
     decoyCowImage.src = "assets/images/decoyCow_Puzzle1.png"; //Will be changed out for our own assets 
-    let decoyCow = new GameObject(decoyCowImage, 500, 270, 300, 300); 
+    let decoyCow = new GameObject(decoyCowImage, 570, 270, 300, 300); 
 
     //Bush 
     let bushImage = new Image();
@@ -43,7 +43,11 @@ window.onload = function (){
     //An Phiast
     let phiastImage = new Image();
     phiastImage.src = "assets/images/AnPhiastHand.png";
-    let phiast = new GameObject(phiastImage, 20, 20, 300, 900);
+    let phiast = new GameObject(phiastImage, 10, 550, 180, 800);
+    let phiastFingerImage = new Image();
+    phiastFingerImage.src = "assets/images/AnPhiastFinger.png";
+    let phiastFinger = new GameObject(phiastFingerImage, 58, 462, 24, 90); 
+    
     let phiastSpeed = 10;
     
     //------------------------------------------------------------------------------------------------------------------------------------------------
@@ -86,55 +90,91 @@ window.onload = function (){
         this.height = height; 
     }
 
+
+    //  Colision Global Variables
     let canClick = false;
     let treeClicked = false;
-
+    let decoyCowClicked = false;
+    let decoyCowSelected = false;
+    let treeSelected = false;
 
     // Collision detection -- if the hand collides with the any of the objects, the player has to press enter/ double tap for mobile, to check behind the object
     function CollisionDetection(){
         let phiastPadding = 2;
-        let phiastLeft = phiast.x + phiastPadding; 
+        let phiastLeft = phiast.x + phiastPadding;
         let phiastRight = phiast.x+ phiast.width;
         let phiastTop = phiast.y + phiastPadding;
 
+
+
+        // Has the tree been clicked?
         if (!treeClicked){
-            const isTreeColliding = 
+            const isTreeColliding =
                 phiastRight >= tree.x &&
                 phiastLeft <= tree.x + tree.width &&
                 phiastTop >= tree.y &&
                 phiastTop <= tree.y +tree.height;
 
-            canClick = isTreeColliding; 
+            treeSelected = isTreeColliding;
         }
         else{
-            canClick = false; 
+            treeSelected = false;
         }
+
+        // Has the decoy cow been clicked?
+        if (!decoyCowClicked){
+            const isDecoyCowColliding = 
+                phiastRight >= decoyCow.x &&
+                phiastLeft <= decoyCow.x + decoyCow.width &&
+                phiastTop >= decoyCow.y &&
+                phiastTop <= decoyCow.y + decoyCow.height;
+
+            decoyCowSelected = isDecoyCowColliding;
+        }
+        else{
+            decoyCowSelected = false;
+        }
+
+        canClick = treeSelected || decoyCowSelected;
     }
 
 
     //------------------------------------------------------------------------------------------------------------------------------------------------
-    //DRAW AND UPATE
+    //DRAW AND UPDATE
     //Draws the images on the canvas 
     function draw(){
         //Clearing space 
         context.clearRect(0,0, canvas.width, canvas.height)
 
         //Background image 
-        context.drawImage(backgroundImage, 0, 0, 1500, 700); 
+        context.drawImage(backgroundImage, 0, 0, 1500, 700);
 
         //Objects
-        if(treeClicked === false){
+        if(treeSelected === false){
             context.drawImage(tree.spritesheet, tree.x, tree.y, tree.width, tree.height);
+            context.strokeStyle="Green";
+            context.strokeRect(tree.x, tree.y, tree.width, tree.height);
         }
-        context.drawImage(decoyCow.spritesheet, decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height); 
-        context.drawImage(bush.spritesheet, bush.x, bush.y, bush.width, bush.height); 
+        if (decoyCowSelected === false){
+            context.drawImage(decoyCow.spritesheet, decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height);
+            context.strokeStyle = "Red";
+            context.strokeRect(decoyCow.x, decoyCow.y, decoyCow.width, decoyCow.height);
+        }
+        context.drawImage(bush.spritesheet, bush.x, bush.y, bush.width, bush.height);
+        context.strokeStyle = "Blue";
+        context.strokeRect(bush.x, bush.y, bush.width, bush.height);
 
         //Timer
         drawTimer();
 
         //"An Phiast"
         context.drawImage(phiast.spritesheet, phiast.x, phiast.y, phiast.width, phiast.height);
-    
+        /*context.strokeStyle = "Orange";
+        context.strokeRect(phiast.x, phiast.y, phiast.width, phiast.height);*/
+        context.drawImage(phiastFinger.spritesheet, phiastFinger.x, phiastFinger.y, phiastFinger.width, phiastFinger.height); 
+        /*context.strokeStyle = "Purple";
+        context.strokeRect(phiastFinger.x, phiastFinger.y, phiastFinger.width, phiastFinger.height);*/ 
+
         // Show when you can click on the objects
         if (canClick){
             context.fillStyle = "rgba(7, 40, 43, 0.95)";
@@ -160,31 +200,41 @@ window.onload = function (){
     function playerMovement(){
         //Response to keys
         if (keys["ArrowUp"] || keys["w"]) {
-            if (phiast.y-20 >= 0){
+            if (phiastFinger.y-20 >= 0){
                 phiast.y -= phiastSpeed;
+                phiastFinger.y -= phiastSpeed; 
             }
         }
         if (keys["ArrowDown"] || keys["s"]) {
             if (phiast.y <= canvas.height - 250){
                 phiast.y += phiastSpeed;
+                phiastFinger.y += phiastSpeed; 
+
             }
         }
         if (keys["ArrowLeft"] || keys["a"]) {
             if(phiast.x >= -20){
                 phiast.x -= phiastSpeed;
+                phiastFinger.x -= phiastSpeed; 
             }
         }
         if (keys["ArrowRight"] || keys["d"]) {
             if(phiast.x <= canvas.width-20){
                 phiast.x += phiastSpeed;
+                phiastFinger.x += phiastSpeed; 
             }
         }
     }
 
     document.addEventListener("keydown", function(event) {
     if (event.key === "Enter" && canClick === true && tree) {
-        treeClicked = true; // Remove the tree from the game
-        canClick = false; // Waits until you collide again to click 
+        if (treeSelected === true){
+            treeClicked = true; // Remove the tree from the game
+        }
+        if (decoyCowSelected === true){
+            decoyCowClicked = true;
+        }
+        canClick = false; // Waits until you collide again to click
     }
 });
 
