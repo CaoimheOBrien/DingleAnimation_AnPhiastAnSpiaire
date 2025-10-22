@@ -126,8 +126,8 @@ function startTypingLine(line) {
 function update() {
     // Characters walk in
   if (cutsceneStep === 0) {
-    phiastX += 3;
-    caraX += 3;
+    phiastX += 5;
+    caraX += 5;
     if (phiastX >= 400) {
       phiastX = 400;
       caraX = 270;
@@ -143,8 +143,8 @@ function update() {
   }
 
   if (currentLineIndex === dialogueLines.length - 1 && !isTyping) {
-    phiastX += 5;
-    caraX += 5;
+    phiastX += 7;
+    caraX += 7;
   }
 }
 
