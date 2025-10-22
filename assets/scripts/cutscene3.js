@@ -32,12 +32,17 @@ cowImage.src = "assets/images/cow.png";
 let sheepImage = new Image();
 sheepImage.src = "assets/images/sheep.png";
 
+//St Cuan image
+let cuanImage = new Image();
+cuanImage.src = "assets/images/StCuan.png";
+
 //---------------------------------------------------------------------------------------------------------------------
 
 let phiastX = 400; // start centre screen
 let caraX = 270; // start centre screen
 let cowX = -300; // start off screen left
-let sheepX = 800; // start beside main characters
+let sheepX = 900; // start beside main characters
+let cuanX = -450; // start off screen left
 
 let onChurch = false; // switch background
 
@@ -55,7 +60,7 @@ const dialogueLines = [
     "Cara: A place?",
     "Sheep: ...the church. But that's all I know! I swear!",
     "*Cow stroms in*",
-    "Cow: SHEPP! You blabbering fool!",
+    "Cow: SHEEP! You blabbering fool!",
     "Sheep: Oh no-",
     "Cow: Can't keep your mouth shut for five minutes, can you? Come on!",
     "Cara: Well... that answers that.",
@@ -87,8 +92,12 @@ function draw(){
     else context.drawImage(townImage, 0, 0, 1500, 700);
 
     //Characters
+    context.save(); // save the current drawing state
+    context.filter = "brightness(20%)"; // darken only this image
+    context.drawImage(cuanImage, cuanX, 100, 600, 630);
+    context.restore(); // restore normal brightness for everything else
     context.drawImage(sheepImage, sheepX, 290, 200, 400);
-    context.drawImage(cowImage, cowX, 120, 200, 500);
+    context.drawImage(cowImage, cowX, 190, 200, 500);
     context.drawImage(phiastImage, phiastX, 170, 380, 600);
     context.drawImage(caraImage, caraX, 420, 180, 250);
 
@@ -152,9 +161,99 @@ function startTypingLine(line) {
 
 startTypingLine(dialogueLines[currentLineIndex]);
 
+function update() {
+    let moving = false; // track if any character is moving
+
+    // Cow stroms in after line 9
+    if (currentLineIndex === 9 && cowX < 700) {
+        cowX += 10;
+        moving = true;
+    }
+
+    // Cow drags Sheep off-screen to the left after line 13
+    if (currentLineIndex >= 13 && cowX > -400) {
+        cowX -= 10;
+        sheepX -= 10;
+        moving = true;
+    }
+
+    // Cuan darts across the church at line 18
+    if (currentLineIndex === 18 && !isTyping && cuanX < 1800) {
+        cuanX += 40;
+        moving = true;
+    }
+
+    // Phiast & Cara walk toward town after line 15
+    if (currentLineIndex >= 15) {
+        // Before town background
+        if (!onChurch && phiastX < 1500) {
+            phiastX += 7;
+            caraX += 7;
+            moving = true;
+
+            if (phiastX >= 1500) {
+                onChurch = true;
+                phiastX = -400; // re-enter from left
+                caraX = -530;
+            }
+        }
+        // Move to center in church
+        else if (onChurch && phiastX < 400) {
+            phiastX += 5;
+            caraX += 5;
+            moving = true;
+        }
+        // Move off right after last town line
+        else if (onChurch && currentLineIndex === dialogueLines.length - 1 && !isTyping) {
+            phiastX += 7;
+            caraX += 7;
+            moving = true;
+        }
+    }
+
+    // Disable input if any movement is happening
+    allowInput = !moving && !isTyping;
+}
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && allowInput) {
+        advanceDialogue();
+    }
+});
+
+function advanceDialogue() {
+    if (isTyping) {
+    // Finish current line instantly
+    typedText = dialogueLines[currentLineIndex];
+    isTyping = false;
+    allowInput = true;
+    return;
+  }
+
+  allowInput = false;
+  currentLineIndex++;
+
+  if (currentLineIndex < dialogueLines.length) {
+    startTypingLine(dialogueLines[currentLineIndex]);
+  } else {
+    typedText = "";
+    if (phiastX >= 1600){
+      startPuzzle();
+    }
+  }
+}
+
+function startPuzzle() {
+    console.log("Puzzle 2 begins!");
+    // setTimeout(() => {
+    //   window.location.href='puzzlePage.html';
+    // }, 2000); 
+
+}
+
 //GAME LOOP
 function gameLoop(){
-    //update();
+    update();
     draw();
     requestAnimationFrame(gameLoop);
 }

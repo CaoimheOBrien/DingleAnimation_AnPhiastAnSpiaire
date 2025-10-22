@@ -149,14 +149,18 @@ function startTypingLine(line) {
 startTypingLine(dialogueLines[currentLineIndex]);
 
 function update() {
+    let moving = false; // track if any movement is happening
+
     // Cow walks away after line 10
     if (currentLineIndex >= 10 && cowX > -300) {
         cowX -= 10;
+        moving = true;
     }
 
     // Sheep darts across the field at line 7
-    if (currentLineIndex === 7 && !isTyping && sheepX < 1800) {
+    if (currentLineIndex === 7 && sheepX < 1800) {
         sheepX += 15;
+        moving = true;
     }
 
     // Phiast & Cara walk toward town after line 13
@@ -165,6 +169,8 @@ function update() {
         if (!onTown && phiastX < 1500) {
             phiastX += 7;
             caraX += 7;
+            moving = true;
+
             if (phiastX >= 1500) {
                 onTown = true;
                 phiastX = -400; // re-enter from left
@@ -179,13 +185,17 @@ function update() {
         else if (onTown && phiastX < 400) {
             phiastX += 5;
             caraX += 5;
+            moving = true;
         }
         // Move off right after last town line
-        else if (onTown && currentLineIndex === dialogueLines.length - 1 && !isTyping) {
+        else if (onTown && currentLineIndex === dialogueLines.length - 1) {
             phiastX += 7;
             caraX += 7;
+            moving = true;
         }
     }
+    // Disable input if movement is happening
+    allowInput = !moving && !isTyping;
 }
 
 window.addEventListener("keydown", (e) => {
