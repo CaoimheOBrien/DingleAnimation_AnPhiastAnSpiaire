@@ -14,7 +14,7 @@ let fieldImage = new Image();
 fieldImage.src = "assets/images/fieldBG_Puzzle1.png";
 
 let townImage = new Image();
-townImage.src = "assets/images/townTemporary.png";
+townImage.src = "assets/images/town.png";
 
 //Phiast image
 let phiastImage = new Image();

@@ -11,7 +11,7 @@ const context = canvas.getContext("2d");
 
 //Background images
 let townImage = new Image();
-townImage.src = "assets/images/townTemporary.png";
+townImage.src = "assets/images/town.png";
 
 let churchImage = new Image();
 churchImage.src = "assets/images/chruchTemporary.jpg";
