@@ -15,11 +15,12 @@ window.onload = function (){
     let background = new Image();
     background.src = "assets/images/Background_AnPhiastCave.png"
 
-    let missionBoardCow= new Image();
-    missionBoardCow.src = "assets/images/missionBoardCow.png"; 
+    let missionBoardCowImage= new Image();
+    missionBoardCowImage.src = "assets/images/missionBoardCow.png";
+    let missionBoardCow = new GameObject(missionBoardCowImage, 30, 170, 700, 450); 
 
     let missionBoardSheep = new Image();
-    missionBoardSheep.src = "assets/images/missionBoardSheep.png"; 
+    missionBoardSheep.src = "assets/images/missionBoardSheep.png";
 
     let missionBoardCuan = new Image();
     missionBoardCuan.src = "assets/images/missionBoardCuan.png"
@@ -33,10 +34,20 @@ window.onload = function (){
         //Background image 
         context.drawImage(background, 0, 0, 1500, 700);
         if(GameState.level == 1){
-            context.drawImage(missionBoardCow, 100, 100);
+            context.drawImage(missionBoardCow.spritesheet, missionBoardCow.x, missionBoardCow.y, missionBoardCow.width, missionBoardCow.height);
         }
 
     }
+
+    //Turns images into an object in the game so that it doesn't loose its 
+    function GameObject(spritesheet, x, y, width, height){
+        this.spritesheet = spritesheet;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height; 
+    }
+
 
     function gameLoop(){
         draw();

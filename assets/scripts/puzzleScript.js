@@ -6,7 +6,7 @@
 
 import { GameState } from "/assets/scripts/level.js";
 function nextLevel(){
-    console.log("Puzzle solved");
+    console.log("Player has won game");
     GameState.level ++;
     console.log("Player has advanced to",GameState.level)
 }
