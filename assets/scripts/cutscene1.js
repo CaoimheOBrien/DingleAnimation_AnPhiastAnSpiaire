@@ -32,6 +32,8 @@ let caraX = -530; // start off screen left
 let cowX = -300; // starts off screen right
 
 let cutsceneStep = 0;
+let cut
+let cutSceneEnded = false;
 let allowInput = false;
 
 const dialogueLines = [
@@ -128,6 +130,8 @@ function update() {
   if (cutsceneStep === 0) {
     phiastX += 3;
     caraX += 3;
+    allowInput = false;
+
     if (phiastX >= 400) {
       phiastX = 400;
       caraX = 270;
@@ -139,12 +143,19 @@ function update() {
   // Cow run
   if (currentLineIndex === 4 && !isTyping) {
     cowX += 15;
-    if (cowX > 4800) cowX = 4800;
+    allowInput = false;
+    if (cowX >= 1800){
+      allowInput = true;
+    }
   }
 
   if (currentLineIndex === dialogueLines.length - 1 && !isTyping) {
     phiastX += 5;
     caraX += 5;
+    allowInput = false;
+  }
+  if (phiastX >= 1800  && caraX >=1700){
+    startPuzzle();
   }
 }
 
@@ -165,7 +176,7 @@ function advanceDialogue() {
 
   allowInput = false;
   currentLineIndex++;
-  
+
   // Trigger actions at specific lines
   if (currentLineIndex === 4) { // Cow runs
     cowX = -300;
@@ -176,7 +187,7 @@ function advanceDialogue() {
   } else {
     typedText = "";
     if (phiastX >= 1600){
-      startPuzzle();
+
     }
   }
 }
@@ -185,8 +196,7 @@ function startPuzzle() {
     console.log("Puzzle 1 begins!");
     setTimeout(() => {
       window.location.href='puzzlePage.html';
-    }, 2000); 
-
+    }, 2000);
 }
 
 //GAME LOOP

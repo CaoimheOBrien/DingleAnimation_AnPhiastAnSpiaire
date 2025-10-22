@@ -4,6 +4,13 @@
 //  Lead Programmer on feature: Caoimhe O'Brien
 //  Date: 08/10/2025
 
+import { GameState } from "/assets/scripts/level.js";
+function nextLevel(){
+    console.log("Puzzle solved");
+    GameState.level ++;
+    console.log("Player has advanced to",GameState.level)
+}
+
 window.onload = function (){
 
     //VARIABLES:
@@ -311,7 +318,7 @@ window.onload = function (){
                 context.fillText("You found Cow!", 200, 200);
             }, 1000);
         }
-        else if (looseGame === true){
+        else if (looseGame === true && winGame === false){
             setTimeout(() => {
                 //Clearing space 
                 context.clearRect(0,0, canvas.width, canvas.height)
@@ -324,6 +331,7 @@ window.onload = function (){
                 context.font = "80px Arial";
                 context.fillText("Time's up! Try again!", 200, 200);
             }, 1000);
+            nextLevel(); 
         }
     }
     
