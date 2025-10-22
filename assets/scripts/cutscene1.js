@@ -61,9 +61,10 @@ function draw(){
     context.drawImage(backgroundImage, 0, 0, 1500, 700); 
 
     //Characters
+    context.drawImage(cowImage, cowX, 120, 200, 500);
     context.drawImage(phiastImage, phiastX, 100, 380, 600);
     context.drawImage(caraImage, caraX, 350, 180, 250);
-    context.drawImage(cowImage, cowX, 120, 200, 500);
+
 
     //dialogue box
     if (typedText !== "") {
