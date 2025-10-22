@@ -2,13 +2,12 @@
 //
 //  Author: Caoimhe O'Brien, Aoife Leahy and Natalia Ryl 
 //  Lead Programmer on feature: Caoimhe O'Brien
-//  Date: 08/10/2025
+//  Date: 22/10/2025
 
 import { GameState } from "/assets/scripts/level.js";
-
 function nextLevel(){
     console.log("Player has won game");
-    GameState.level = 2;
+    GameState.level = 3; 
     console.log("Player has advanced to", GameState.level)
     window.location.href="missionBoard.html";
 }

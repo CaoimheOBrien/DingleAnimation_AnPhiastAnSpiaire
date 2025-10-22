@@ -7,6 +7,9 @@
 const canvas = document.getElementById("the_canvas")
 const context = canvas.getContext("2d");
 
+import { GameState } from "./level.js";
+
+GameState.level = 1; //Makes sure Game Level is 1 for the first cut scene 
 //--------------------------------------------------------------------------------------------------------------------
 
 //Background image 

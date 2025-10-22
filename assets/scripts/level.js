@@ -5,6 +5,11 @@
 //  Date: 22/10/2025
 
 export const GameState = {
-    level: 1
+    get level(){
+        return parseInt(localStorage.getItem("level")) || 1;
+    },
+    set level (val){
+        localStorage.setItem("level", val);
+    },
 };
 
