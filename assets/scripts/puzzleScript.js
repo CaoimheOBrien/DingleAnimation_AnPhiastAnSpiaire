@@ -317,10 +317,11 @@ window.onload = function (){
                 context.font = "80px Arial";
                 context.fillText("You found Cow!", 200, 200);
             }, 1000);
+            nextLevel();
         }
         else if (looseGame === true && winGame === false){
             setTimeout(() => {
-                //Clearing space 
+                //Clearing space
                 context.clearRect(0,0, canvas.width, canvas.height)
 
                 //Background image 
@@ -331,10 +332,10 @@ window.onload = function (){
                 context.font = "80px Arial";
                 context.fillText("Time's up! Try again!", 200, 200);
             }, 1000);
-            nextLevel(); 
+            nextLevel();
         }
     }
-    
+
     window.requestAnimationFrame(gameLoop);
 
 }

@@ -4,6 +4,7 @@
 // Primary Programmer: Caoimhe O'Brien 
 // Date: 21/10/2025
 
+import { GameState } from "./level.js";
 
 window.onload = function (){
     const canvas = document.getElementById("the_canvas")
@@ -26,14 +27,15 @@ window.onload = function (){
 
     //--------------------------------------------------------------------------------------------------------------------
     function draw(){
-        //Clearing space 
+        //Clearing space
         context.clearRect(0,0, canvas.width, canvas.height)
 
         //Background image 
         context.drawImage(background, 0, 0, 1500, 700);
+        if(GameState.level == 1){
+            context.drawImage(missionBoardCow, 100, 100);
+        }
 
-        
-        
     }
 
     function gameLoop(){
