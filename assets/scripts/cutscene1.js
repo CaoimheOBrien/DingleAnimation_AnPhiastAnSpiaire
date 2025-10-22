@@ -1,7 +1,7 @@
 //  Dingle Animation Game Prototype: An Phiast An Spiaire
 
 // Author: Caoimhe O'Brien, Aoife Leahy and Natalia Ryl 
-// Primary Programmer: Natalia Ryl
+// Primary Programmer: Natalia Ryl. 
 // Date: 09/10/2025
 
 const canvas = document.getElementById("the_canvas")
@@ -32,7 +32,6 @@ let caraX = -530; // start off screen left
 let cowX = -300; // starts off screen right
 
 let cutsceneStep = 0;
-let cut
 let cutSceneEnded = false;
 let allowInput = false;
 
@@ -88,22 +87,22 @@ function draw(){
 }
 
 //TEXT WRAPPING HELPER
-function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+function wrapText(context, text, x, y, maxWidth, lineHeight) {
   const words = text.split(" ");
   let line = "";
   for (let n = 0; n < words.length; n++) {
     const testLine = line + words[n] + " ";
-    const metrics = ctx.measureText(testLine);
+    const metrics = context.measureText(testLine);
     const testWidth = metrics.width;
     if (testWidth > maxWidth && n > 0) {
-      ctx.fillText(line, x, y);
+      context.fillText(line, x, y);
       line = words[n] + " ";
       y += lineHeight;
     } else {
       line = testLine;
     }
   }
-  ctx.fillText(line, x, y);
+  context.fillText(line, x, y);
 }
 
 //TYPEWRITER FUNCTION
@@ -195,7 +194,7 @@ function advanceDialogue() {
 function startPuzzle() {
     console.log("Puzzle 1 begins!");
     setTimeout(() => {
-      window.location.href='puzzlePage.html';
+      window.location.href="missionBoard.html";
     }, 2000);
 }
 
@@ -205,5 +204,5 @@ function gameLoop(){
     draw();
     requestAnimationFrame(gameLoop);
 }
-    
+
 gameLoop();
