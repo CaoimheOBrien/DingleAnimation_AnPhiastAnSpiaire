@@ -13,13 +13,13 @@ const context = canvas.getContext("2d");
 let backgroundImage = new Image(); 
 backgroundImage.src = "assets/images/fieldBG.png";
 
-//Phiast images
-let phiastFrontImage = new Image();
-phiastFrontImage.src = "assets/images/phiast_front.png";
+//Phiast image
+let phiastImage = new Image();
+phiastImage.src = "assets/images/phiast.png";
 
-//Cara images
-let caraFrontImage = new Image();
-caraFrontImage.src = "assets/images/cara_front.png";
+//Cara image
+let caraImage = new Image();
+caraImage.src = "assets/images/cara.png";
 
 //Cow image
 let cowImage = new Image();
@@ -31,19 +31,18 @@ let phiastX = -400; // start off screen left
 let caraX = -530; // start off screen left
 let cowX = -300; // starts off screen right
 
-// let dialogue = "";
 let cutsceneStep = 0;
 let allowInput = false;
 
 const dialogueLines = [
     "Cara: This is the field. Cow was last seen here.",
-    "An Phiast: Good. If we can find her, we might finally get some answers about St. Cuan.",
-    "Cara: Think she'll talk?",
-    "An Phiast: Only if we find her before she bolts.",
+    "An Phiast: Then we're in the right place. Something's going on between her and Sheep.",
+    "Cara: You think they are working together?",
+    "An Phiast: Maybe.. But we'll need to find Cow first to know for sure.",
     "*A shadow darts across the field...*",
     "Cara: There! That was Cow!",
     "An Phiast: She's hiding. We'll have to search the area.",
-    "Find where Cow is hiding to confront her for information."
+    "Find where Cow is hiding to learn what she and Sheep are planning."
 ];
 
 let currentLineIndex = 0;
@@ -62,8 +61,8 @@ function draw(){
     context.drawImage(backgroundImage, 0, 0, 1500, 700); 
 
     //Characters
-    context.drawImage(phiastFrontImage, phiastX, 100, 380, 600);
-    context.drawImage(caraFrontImage, caraX, 350, 180, 250);
+    context.drawImage(phiastImage, phiastX, 100, 380, 600);
+    context.drawImage(caraImage, caraX, 350, 180, 250);
     context.drawImage(cowImage, cowX, 120, 200, 500);
 
     //dialogue box
@@ -126,8 +125,8 @@ function startTypingLine(line) {
 function update() {
     // Characters walk in
   if (cutsceneStep === 0) {
-    phiastX += 5;
-    caraX += 5;
+    phiastX += 3;
+    caraX += 3;
     if (phiastX >= 400) {
       phiastX = 400;
       caraX = 270;
@@ -138,13 +137,13 @@ function update() {
 
   // Cow run
   if (currentLineIndex === 4 && !isTyping) {
-    cowX += 50;
+    cowX += 15;
     if (cowX > 4800) cowX = 4800;
   }
 
   if (currentLineIndex === dialogueLines.length - 1 && !isTyping) {
-    phiastX += 10;
-    caraX += 10;
+    phiastX += 5;
+    caraX += 5;
   }
 }
 
@@ -179,8 +178,6 @@ function advanceDialogue() {
       startPuzzle();
     }
   }
-
-
 }
 
 function startPuzzle() {
