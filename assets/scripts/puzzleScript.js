@@ -3,6 +3,7 @@
 //  Author: Caoimhe O'Brien, Aoife Leahy and Natalia Ryl 
 //  Lead Programmer on feature: Caoimhe O'Brien
 //  Date: 08/10/2025
+import { gameState } from "level.js";
 
 window.onload = function (){
 
@@ -324,6 +325,12 @@ window.onload = function (){
                 context.font = "80px Arial";
                 context.fillText("Time's up! Try again!", 200, 200);
             }, 1000);
+
+            function nextLevel(){
+                console.log("Level 1 done");
+                gameState.missionNumber++;
+                console.log("Onto next level", gameState.missionNumber)
+            }
         }
     }
     

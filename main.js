@@ -6,4 +6,6 @@ window.onload = () => {
     }
   }
 
-let missionNumber = 0; 
+export const gameState = {
+  missionNumber: 0
+}; 

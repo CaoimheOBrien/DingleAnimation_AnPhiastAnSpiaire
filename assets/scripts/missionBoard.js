@@ -13,8 +13,18 @@ window.onload = function (){
     // Background image
     let background = new Image();
     background.src = "assets/images/Background_AnPhiastCave.png"
+
+    let missionBoardCow= new Image();
+    missionBoardCow.src = "assets/images/missionBoardCow.png"; 
+
+    let missionBoardSheep = new Image();
+    missionBoardSheep.src = "assets/images/missionBoardSheep.png"; 
+
+    let missionBoardCuan = new Image();
+    missionBoardCuan.src = "assets/images/missionBoardCuan.png"
+
+
     //--------------------------------------------------------------------------------------------------------------------
-    
     function draw(){
         //Clearing space 
         context.clearRect(0,0, canvas.width, canvas.height)
