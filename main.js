@@ -6,3 +6,4 @@ window.onload = () => {
     }
   }
 
+let missionNumber = 0; 
