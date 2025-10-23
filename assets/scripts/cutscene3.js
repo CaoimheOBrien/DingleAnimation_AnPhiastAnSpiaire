@@ -59,16 +59,16 @@ const dialogueLines = [
     "Sheep: Okay okay! I might've heard something. Maybe. Possibly. About a place...",
     "Cara: A place?",
     "Sheep: ...the church. But that's all I know! I swear!",
-    "*Cow stroms in*",
+    "*Cow storms in*",
     "Cow: SHEEP! You blabbering fool!",
     "Sheep: Oh no-",
     "Cow: Can't keep your mouth shut for five minutes, can you? Come on!",
     "Cara: Well... that answers that.",
     "An Phiast: The church it is then.",
-    "*They approach the old church. The door creaks open*",
+    "*They approach St. Cuan's church. The door creaks open*",
     "Cara: It's dark in here...",
     "An Phiast: Stay close.",
-    "*Suddenly, a shadow darts across the far wall-just for a moment, it looks like St. Cuan.*",
+    "*Suddenly, a shadow darts across the far wall; just for a moment, it looks like St. Cuan.*",
     "Cara: Did you see that?",
     "An Phiast: I did. It looked like... no, it couldn't be.",
     "Cara: Only one way to find out.",
@@ -208,6 +208,7 @@ function update() {
             phiastX += 7;
             caraX += 7;
             moving = true;
+            startPuzzle(); 
         }
     }
 
@@ -244,10 +245,10 @@ function advanceDialogue() {
 }
 
 function startPuzzle() {
-    console.log("Puzzle 2 begins!");
-    // setTimeout(() => {
-    //   window.location.href='puzzlePage.html';
-    // }, 2000); 
+    console.log("Puzzle 3 begins!");
+      setTimeout(() => {
+       window.location.href= "missionBoard.html";
+     }, 2000); 
 
 }
 

@@ -25,6 +25,16 @@ const dialogue2Lines = [
     "Ready? Let's go!"
 ];
 
+const dialogue3Lines = [
+    "You'er getting close I can feel it!",
+    "Thanks to Cow and sheep, we know that the culprit Phiast needs to catch is in the church.",
+    "We're pretty sure it's St. Cuan! But it can't be. (or could it).",
+    "Just like you found Cow and Sheep, you're going to need to search for the shadowy figure.",
+    "You have to find the shadowy figure before they runs away, there will be a timer to remind you.",
+    "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects.",
+    "Ready? Let's go!"
+];
+
 const canvas = document.getElementById("the_canvas")
 const context = canvas.getContext("2d");
 
@@ -41,13 +51,14 @@ let missionBoardSheepImage = new Image();
 missionBoardSheepImage.src = "assets/images/missionBoardSheep.png";
 let missionBoardSheep = new GameObject(missionBoardSheepImage, 30, 170, 700, 450);
 
-let missionBoardCuan = new Image();
-missionBoardCuan.src = "assets/images/missionBoardCuan.png";
+let missionBoardCuanImage = new Image();
+missionBoardCuanImage.src = "assets/images/missionBoardCuan.png";
+let missionBoardCuan = new GameObject(missionBoardCuanImage, 30, 170, 700, 450); 
 
 //Levels
 let nowLevel1 = false;
 let nowLevel2 = false;
-let nowlevel3 = false; 
+let nowLevel3 = false; 
 
 //Dialogue stuff
 let allowInput = false;
@@ -117,6 +128,27 @@ function draw(){
         }
     }
 
+    if (GameState.level === 3){
+        console.log("Drawing level 3"); 
+        context.drawImage(missionBoardCuan.spritesheet, missionBoardCuan.x, missionBoardCuan.y, missionBoardCuan.width, missionBoardCuan.height);
+        //dialogue box
+        if (typedText !== "") {
+            context.fillStyle = "rgba(0, 0, 0, 0.8)";
+            context.fillRect(80, 540, 1340, 140);
+            context.strokeStyle = "white";
+            context.lineWidth = 4;
+            context.strokeRect(80, 540, 1340, 140);
+
+            context.fillStyle = "white";
+            context.font = "22px Arial";
+            wrapText(context, typedText, 110, 580, 1220, 28);
+
+            if (allowInput) {
+                context.font = "18px Arial";
+                context.fillText("(Press Enter to continue...)", 1100, 640);
+            }
+        }
+    }
 }
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -210,17 +242,44 @@ function advanceDialogue() {
             GameState.level = 2;
         }
     }
-}
-
-    function restartDialogueLine(level){
-        currentLineIndex = 0;
-        if (level === 1){
-            startTypingLine(dialogue1Lines[currentLineIndex]);
+    else if (GameState.level === 3){
+        if (isTyping) {
+            typedText = dialogue3Lines[currentLineIndex];
+            isTyping = false;
+            allowInput = true;
+            return;
         }
-        else if (level === 2) {
-            startTypingLine(dialogue2Lines[currentLineIndex]);
+
+        allowInput = false;
+        currentLineIndex++;
+        console.log("Now level is:", GameState.level);
+
+        if (currentLineIndex < dialogue3Lines.length) {
+            startTypingLine(dialogue3Lines[currentLineIndex]);
+        } else {
+            typedText = "";
+            nowLevel3 = true;
+            GameState.level = 3;
         }
     }
+}
+
+function restartDialogueLine(level){
+    currentLineIndex = 0;
+    typedText = "";
+    allowInput = false;
+    isTyping = false;
+
+    if (level === 1){
+        startTypingLine(dialogue1Lines[currentLineIndex]);
+    }
+    else if (level === 2) {
+        startTypingLine(dialogue2Lines[currentLineIndex]);
+    }
+    else if (level === 3) {
+        startTypingLine(dialogue3Lines[currentLineIndex]);
+    }
+}
 //--------------------------------------------------------------------------------------------------------------------
 //UPDATE
 function update(){
@@ -231,6 +290,10 @@ function update(){
     else if (GameState.level === 2 && nowLevel2 === true){
         console.log("Moving to next level");
         window.location.href="puzzle2Page.html";
+    }
+    else if (GameState.level === 3 && nowLevel3 === true){
+        console.log("Moving to next level");
+        window.location.href="puzzle3Page.html";
     }
 }
 

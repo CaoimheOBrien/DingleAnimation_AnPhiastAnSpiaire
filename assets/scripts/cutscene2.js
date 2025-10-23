@@ -199,6 +199,7 @@ function update() {
         }
     }
 
+
     // Disable input if movement is happening
     allowInput = !moving && !isTyping;
 }
@@ -225,9 +226,6 @@ function advanceDialogue() {
     startTypingLine(dialogueLines[currentLineIndex]);
   } else {
     typedText = "";
-    if (phiastX >= 1600){
-      
-    }
   }
 }
 
