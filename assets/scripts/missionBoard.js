@@ -22,8 +22,22 @@ const dialogue2Lines = [
     "You have to find Sheep before she runs away, there will be a timer to remind you.",
     "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects."
 ];
+
 const canvas = document.getElementById("the_canvas")
 const context = canvas.getContext("2d");
+    //--------------------------------------------------------------------------------------------------------------------
+    // Background image
+    let background = new Image();
+    background.src = "assets/images/Background_AnPhiastCave.png"
+
+    let missionBoardCow= new Image();
+    missionBoardCow.src = "assets/images/missionBoardCow.png"; 
+
+    let missionBoardSheep = new Image();
+    missionBoardSheep.src = "assets/images/missionBoardSheep.png"; 
+
+    let missionBoardCuan = new Image();
+    missionBoardCuan.src = "assets/images/missionBoardCuan.png"
 
 //--------------------------------------------------------------------------------------------------------------------
 // Background image
@@ -243,4 +257,3 @@ function gameLoop(){
 
 restartDialogueLine(GameState.level);
 window.requestAnimationFrame(gameLoop);
-

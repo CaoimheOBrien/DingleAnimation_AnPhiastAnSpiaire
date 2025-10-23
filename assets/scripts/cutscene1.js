@@ -127,38 +127,44 @@ function startTypingLine(line) {
   typeStep();
 }
 
+startTypingLine(dialogueLines[currentLineIndex]);
+
 function update() {
+    let moving = false; // track if any movement is happening
+
     // Characters walk in
-  if (cutsceneStep === 0) {
-    phiastX += 3;
-    caraX += 3;
-    allowInput = false;
+    if (cutsceneStep === 0) {
+        phiastX += 5;
+        caraX += 5;
+        moving = true;
 
-    if (phiastX >= 400) {
-      phiastX = 400;
-      caraX = 270;
-      cutsceneStep = 1;
-      startTypingLine(dialogueLines[currentLineIndex]);
+        if (phiastX >= 400) {
+            phiastX = 400;
+            caraX = 270;
+            cutsceneStep = 1;
+            moving = false; // stop moving once in position
+        }
     }
-  }
 
-  // Cow run
-  if (currentLineIndex === 4 && !isTyping) {
-    cowX += 15;
-    allowInput = false;
-    if (cowX >= 1800){
-      allowInput = true;
+    // Cow runs across screen after line 4
+    if (currentLineIndex >= 4 && !isTyping) {
+        cowX += 15;
+        moving = true;
+        if (cowX > 1800) {
+            cowX = 1800;
+            moving = false;
+        }
     }
-  }
 
-  if (currentLineIndex === dialogueLines.length - 1 && !isTyping) {
-    phiastX += 5;
-    caraX += 5;
-    allowInput = false;
-  }
-  if (phiastX >= 1800  && caraX >=1700){
-    startPuzzle();
-  }
+    // Phiast & Cara walk off right at last line
+    if (currentLineIndex === dialogueLines.length - 1 && !isTyping) {
+        phiastX += 7;
+        caraX += 7;
+        moving = true;
+    }
+
+    // Disable input while movement or typing is happening
+    allowInput = !moving && !isTyping;
 }
 
 window.addEventListener("keydown", (e) => {
@@ -189,7 +195,7 @@ function advanceDialogue() {
   } else {
     typedText = "";
     if (phiastX >= 1600){
-
+      startPuzzle();
     }
   }
 }

@@ -334,10 +334,14 @@ window.onload = function (){
                 context.font = "80px Arial";
                 context.fillText("Time's up! Try again!", 200, 200);
             }, 1000);
-            nextLevel();
         }
     }
 
+    function nextLevel(){
+        console.log("Level 1 done");
+        gameState.missionNumber++;
+        console.log("Onto next level", gameState.missionNumber)
+    }
     window.requestAnimationFrame(gameLoop);
 
 }
