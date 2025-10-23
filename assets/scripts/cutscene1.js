@@ -162,6 +162,9 @@ function update() {
         caraX += 7;
         moving = true;
     }
+     if (phiastX >= 1800  && caraX >=1700){
+      startPuzzle();
+    }
 
     // Disable input while movement or typing is happening
     allowInput = !moving && !isTyping;
@@ -195,7 +198,7 @@ function advanceDialogue() {
   } else {
     typedText = "";
     if (phiastX >= 1600){
-      startPuzzle();
+      
     }
   }
 }

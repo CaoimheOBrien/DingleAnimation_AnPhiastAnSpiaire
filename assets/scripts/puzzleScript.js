@@ -10,7 +10,7 @@ function nextLevel(){
     console.log("Player has won game");
     GameState.level = 2;
     console.log("Player has advanced to", GameState.level)
-    window.location.href="missionBoard.html";
+    window.location.href="cutscene2.html";
 }
 
 window.onload = function (){
@@ -205,14 +205,26 @@ window.onload = function (){
         // Show when you can click on the objects
         if (canClick){
             if (treeSelected || decoyCowSelected || bushSelected){
-                context.fillStyle = "rgba(7, 40, 43, 0.95)";
+               context.fillStyle = "rgba(0, 0, 0, 0.6)";
+                context.fillRect(5, 8, 350, 40);
+                context.strokeStyle = "white";
+                context.lineWidth = 4;
+                context.strokeRect(5, 8, 350, 40);
+
+                context.fillStyle = "white";
                 context.font = "20px Arial";
-                context.fillText("Press Enter to look behind the object", tree.x, tree.y - 10);
+                context.fillText("Press Enter to look behind the object", 10, 35);
             }
             else if (realCowSelected){
-                context.fillStyle = "rgba(7, 40, 43, 0.95)";
+                context.fillStyle = "rgba(0, 0, 0, 0.6)";
+                context.fillRect(5, 8, 350, 40);
+                context.strokeStyle = "white";
+                context.lineWidth = 4;
+                context.strokeRect(5, 8, 350, 40);
+
+                context.fillStyle = "white";
                 context.font = "20px Arial";
-                context.fillText("Press Enter to catch Cow!", tree.x, tree.y - 10);
+                context.fillText("Press Enter to catch Cow!", 10, 35);
             }
         }
     }
@@ -301,11 +313,14 @@ window.onload = function (){
     //------------------------------------------------------------------------------------------------------------------------------------------------
     //GAME LOOP
     function gameLoop(){
+        //Game is playing
         if (winGame === false && looseGame === false){
             update();
             draw();
             window.requestAnimationFrame(gameLoop);
         }
+
+        //Game has been won --> moving to next level
         else if (winGame=== true){
             setTimeout(() => {
                 //Clearing space 
@@ -321,6 +336,8 @@ window.onload = function (){
             }, 1000);
             nextLevel();
         }
+
+        // Player didn't find cow in time so game is reset
         else if (looseGame === true && winGame === false){
             setTimeout(() => {
                 //Clearing space
@@ -330,18 +347,17 @@ window.onload = function (){
                 context.drawImage(backgroundImage, 0, 0, 1500, 700);
 
                 //End Message
-                context.fillStyle = "rgba(7, 40, 43, 0.95)";
+                context.fillStyle = "rgba(44, 52, 59, 0.3)";
+                context.fillRect(180, 120, 780, 150);
+
+                context.fillStyle = "White";
                 context.font = "80px Arial";
-                context.fillText("Time's up! Try again!", 200, 200);
+                context.fillText("Time's up! Try again!", 200, 230);
             }, 1000);
+            setTimeout(() => location.reload(), 3000);
         }
     }
 
-    function nextLevel(){
-        console.log("Level 1 done");
-        gameState.missionNumber++;
-        console.log("Onto next level", gameState.missionNumber)
-    }
     window.requestAnimationFrame(gameLoop);
 
 }

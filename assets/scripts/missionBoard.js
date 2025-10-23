@@ -12,7 +12,8 @@ const dialogue1Lines = [
     "Use the Mission Board to see where you are in the mission.",
     "Find where Cow is hiding to learn what she and Sheep are planning.",
     "You have to find Cow before she runs away, there will be a timer to remind you.",
-    "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects."
+    "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects.",
+    "Ready? Let's go!"
 ];
 
 const dialogue2Lines = [
@@ -20,24 +21,12 @@ const dialogue2Lines = [
     "Now to find Sheep. She's hiding in the Town Square.",
     "Just like you found Cow, you're going to need to search for Sheep.",
     "You have to find Sheep before she runs away, there will be a timer to remind you.",
-    "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects."
+    "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects.",
+    "Ready? Let's go!"
 ];
 
 const canvas = document.getElementById("the_canvas")
 const context = canvas.getContext("2d");
-    //--------------------------------------------------------------------------------------------------------------------
-    // Background image
-    let background = new Image();
-    background.src = "assets/images/Background_AnPhiastCave.png"
-
-    let missionBoardCow= new Image();
-    missionBoardCow.src = "assets/images/missionBoardCow.png"; 
-
-    let missionBoardSheep = new Image();
-    missionBoardSheep.src = "assets/images/missionBoardSheep.png"; 
-
-    let missionBoardCuan = new Image();
-    missionBoardCuan.src = "assets/images/missionBoardCuan.png"
 
 //--------------------------------------------------------------------------------------------------------------------
 // Background image

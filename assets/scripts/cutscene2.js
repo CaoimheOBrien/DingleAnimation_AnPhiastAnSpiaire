@@ -195,8 +195,10 @@ function update() {
             phiastX += 7;
             caraX += 7;
             moving = true;
+            startPuzzle();
         }
     }
+
     // Disable input if movement is happening
     allowInput = !moving && !isTyping;
 }
@@ -224,16 +226,16 @@ function advanceDialogue() {
   } else {
     typedText = "";
     if (phiastX >= 1600){
-      startPuzzle();
+      
     }
   }
 }
 
 function startPuzzle() {
-    console.log("Puzzle 2 begins!");
-    // setTimeout(() => {
-    //   window.location.href='puzzlePage.html';
-    // }, 2000); 
+  console.log("Puzzle 2 begins!");
+  setTimeout(() => {
+    window.location.href= "missionBoard.html";
+  }, 2000); 
 
 }
 
