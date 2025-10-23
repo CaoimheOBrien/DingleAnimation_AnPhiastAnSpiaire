@@ -11,10 +11,10 @@ const context = canvas.getContext("2d");
 
 //Background images
 let townImage = new Image();
-townImage.src = "assets/images/townTemporary.png";
+townImage.src = "assets/images/town.png";
 
-//let churchImage = new Image();
-//churchImage.src = "";
+let churchImage = new Image();
+churchImage.src = "assets/images/chruchTemporary.jpg";
 
 //Phiast image
 let phiastImage = new Image();
@@ -32,12 +32,22 @@ cowImage.src = "assets/images/cow.png";
 let sheepImage = new Image();
 sheepImage.src = "assets/images/sheep.png";
 
+//St Cuan image
+let cuanImage = new Image();
+cuanImage.src = "assets/images/StCuan.png";
+
 //---------------------------------------------------------------------------------------------------------------------
 
 let phiastX = 400; // start centre screen
 let caraX = 270; // start centre screen
 let cowX = -300; // start off screen left
-let sheepX = 800; // start beside main characters
+let sheepX = 900; // start beside main characters
+let cuanX = -450; // start off screen left
+
+let onChurch = false; // switch background
+
+let cutsceneStep = 0;
+let allowInput = false;
 
 const dialogueLines = [
     "Cara: There you are Sheep!",
@@ -50,7 +60,7 @@ const dialogueLines = [
     "Cara: A place?",
     "Sheep: ...the church. But that's all I know! I swear!",
     "*Cow stroms in*",
-    "Cow: SHEPP! You blabbering fool!",
+    "Cow: SHEEP! You blabbering fool!",
     "Sheep: Oh no-",
     "Cow: Can't keep your mouth shut for five minutes, can you? Come on!",
     "Cara: Well... that answers that.",
@@ -64,3 +74,188 @@ const dialogueLines = [
     "Cara: Only one way to find out.",
     "Find out who is lurking in the shadows."
 ];
+
+let currentLineIndex = 0;
+let typedText = "";
+let typingSpeed = 30;
+let typingTimer = 0;
+let isTyping = false;
+
+//---------------------------------------------------------------------------------------------------------------------
+
+function draw(){
+    //Clearing space 
+    context.clearRect(0,0, canvas.width, canvas.height)
+
+    //Background
+    if(onChurch) context.drawImage(churchImage, 0, 0, 1500, 700);
+    else context.drawImage(townImage, 0, 0, 1500, 700);
+
+    //Characters
+    context.save(); // save the current drawing state
+    context.filter = "brightness(20%)"; // darken only this image
+    context.drawImage(cuanImage, cuanX, 100, 600, 630);
+    context.restore(); // restore normal brightness for everything else
+    context.drawImage(sheepImage, sheepX, 290, 200, 400);
+    context.drawImage(cowImage, cowX, 190, 200, 500);
+    context.drawImage(phiastImage, phiastX, 170, 380, 600);
+    context.drawImage(caraImage, caraX, 420, 180, 250);
+
+
+    //dialogue box
+    if (typedText !== "") {
+        context.fillStyle = "rgba(0, 0, 0, 0.8)";
+        context.fillRect(80, 540, 1340, 140);
+        context.strokeStyle = "white";
+        context.lineWidth = 4;
+        context.strokeRect(80, 540, 1340, 140);
+
+        context.fillStyle = "white";
+        context.font = "22px Arial";
+        wrapText(context, typedText, 110, 580, 1220, 28);
+
+        if (allowInput) {
+            context.font = "18px Arial";
+            context.fillText("(Press Enter to continue...)", 1100, 640);
+        }
+    }
+}
+
+//TEXT WRAPPING HELPER
+function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+  const words = text.split(" ");
+  let line = "";
+  for (let n = 0; n < words.length; n++) {
+    const testLine = line + words[n] + " ";
+    const metrics = ctx.measureText(testLine);
+    const testWidth = metrics.width;
+    if (testWidth > maxWidth && n > 0) {
+      ctx.fillText(line, x, y);
+      line = words[n] + " ";
+      y += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line, x, y);
+}
+
+//TYPEWRITER FUNCTION
+function startTypingLine(line) {
+  typedText = "";
+  isTyping = true;
+  typingTimer = 0;
+
+  function typeStep() {
+    if (typedText.length < line.length) {
+      typedText += line[typedText.length];
+      setTimeout(typeStep, typingSpeed);
+    } else {
+      isTyping = false;
+      allowInput = true;
+    }
+  }
+
+  typeStep();
+}
+
+startTypingLine(dialogueLines[currentLineIndex]);
+
+function update() {
+    let moving = false; // track if any character is moving
+
+    // Cow stroms in after line 9
+    if (currentLineIndex === 9 && cowX < 700) {
+        cowX += 10;
+        moving = true;
+    }
+
+    // Cow drags Sheep off-screen to the left after line 13
+    if (currentLineIndex >= 13 && cowX > -400) {
+        cowX -= 10;
+        sheepX -= 10;
+        moving = true;
+    }
+
+    // Cuan darts across the church at line 18
+    if (currentLineIndex === 18 && !isTyping && cuanX < 1800) {
+        cuanX += 40;
+        moving = true;
+    }
+
+    // Phiast & Cara walk toward town after line 15
+    if (currentLineIndex >= 15) {
+        // Before town background
+        if (!onChurch && phiastX < 1500) {
+            phiastX += 7;
+            caraX += 7;
+            moving = true;
+
+            if (phiastX >= 1500) {
+                onChurch = true;
+                phiastX = -400; // re-enter from left
+                caraX = -530;
+            }
+        }
+        // Move to center in church
+        else if (onChurch && phiastX < 400) {
+            phiastX += 5;
+            caraX += 5;
+            moving = true;
+        }
+        // Move off right after last town line
+        else if (onChurch && currentLineIndex === dialogueLines.length - 1 && !isTyping) {
+            phiastX += 7;
+            caraX += 7;
+            moving = true;
+        }
+    }
+
+    // Disable input if any movement is happening
+    allowInput = !moving && !isTyping;
+}
+
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && allowInput) {
+        advanceDialogue();
+    }
+});
+
+function advanceDialogue() {
+    if (isTyping) {
+    // Finish current line instantly
+    typedText = dialogueLines[currentLineIndex];
+    isTyping = false;
+    allowInput = true;
+    return;
+  }
+
+  allowInput = false;
+  currentLineIndex++;
+
+  if (currentLineIndex < dialogueLines.length) {
+    startTypingLine(dialogueLines[currentLineIndex]);
+  } else {
+    typedText = "";
+    if (phiastX >= 1600){
+      startPuzzle();
+    }
+  }
+}
+
+function startPuzzle() {
+    console.log("Puzzle 2 begins!");
+    // setTimeout(() => {
+    //   window.location.href='puzzlePage.html';
+    // }, 2000); 
+
+}
+
+//GAME LOOP
+function gameLoop(){
+    update();
+    draw();
+    requestAnimationFrame(gameLoop);
+}
+    
+gameLoop();

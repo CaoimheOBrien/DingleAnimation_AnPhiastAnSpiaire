@@ -14,7 +14,7 @@ let fieldImage = new Image();
 fieldImage.src = "assets/images/fieldBG_Puzzle1.png";
 
 let townImage = new Image();
-townImage.src = "assets/images/townTemporary.png";
+townImage.src = "assets/images/town.png";
 
 //Phiast image
 let phiastImage = new Image();
@@ -35,9 +35,11 @@ sheepImage.src = "assets/images/sheep.png";
 //---------------------------------------------------------------------------------------------------------------------
 
 let phiastX = 400; // start centre screen
+let phiastY = 100; // need this for when they eneter town scene
 let caraX = 270; // start centre screen
+let caraY = 350; // need this for when they eneter town scene
 let cowX = 800; // start beside main characters
-let sheepX = -300; // start off screen left
+let sheepX = -200; // start off screen left
 
 let onTown = false; // switch background
 
@@ -81,10 +83,11 @@ function draw(){
     else context.drawImage(fieldImage, 0, 0, 1500, 700);
 
     //Characters
-    context.drawImage(phiastImage, phiastX, 100, 380, 600);
-    context.drawImage(caraImage, caraX, 350, 180, 250);
-    context.drawImage(cowImage, cowX, 120, 200, 500);
     context.drawImage(sheepImage, sheepX, 220, 200, 400);
+    context.drawImage(cowImage, cowX, 120, 200, 500);
+    context.drawImage(phiastImage, phiastX, phiastY, 380, 600);
+    context.drawImage(caraImage, caraX, caraY, 180, 250);
+
 
     //dialogue box
     if (typedText !== "") {
@@ -146,39 +149,53 @@ function startTypingLine(line) {
 startTypingLine(dialogueLines[currentLineIndex]);
 
 function update() {
+    let moving = false; // track if any movement is happening
+
     // Cow walks away after line 10
     if (currentLineIndex >= 10 && cowX > -300) {
-        cowX -= 3;
+        cowX -= 10;
+        moving = true;
     }
 
     // Sheep darts across the field at line 7
-    if (currentLineIndex === 7 && !isTyping && sheepX < 1800) {
+    if (currentLineIndex === 7 && sheepX < 1800) {
         sheepX += 15;
+        moving = true;
     }
 
     // Phiast & Cara walk toward town after line 13
     if (currentLineIndex >= 13) {
         // Before town background
         if (!onTown && phiastX < 1500) {
-            phiastX += 3;
-            caraX += 3;
+            phiastX += 7;
+            caraX += 7;
+            moving = true;
+
             if (phiastX >= 1500) {
                 onTown = true;
                 phiastX = -400; // re-enter from left
                 caraX = -530;
+
+                // move them lower on screen
+                phiastY = 170;
+                caraY = 420;
             }
         }
         // Move to center in town
         else if (onTown && phiastX < 400) {
-            phiastX += 3;
-            caraX += 3;
+            phiastX += 5;
+            caraX += 5;
+            moving = true;
         }
         // Move off right after last town line
-        else if (onTown && currentLineIndex === dialogueLines.length - 1 && !isTyping) {
-            phiastX += 3;
-            caraX += 3;
+        else if (onTown && currentLineIndex === dialogueLines.length - 1) {
+            phiastX += 7;
+            caraX += 7;
+            moving = true;
         }
     }
+    // Disable input if movement is happening
+    allowInput = !moving && !isTyping;
 }
 
 window.addEventListener("keydown", (e) => {
