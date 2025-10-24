@@ -238,9 +238,6 @@ function advanceDialogue() {
     startTypingLine(dialogueLines[currentLineIndex]);
   } else {
     typedText = "";
-    if (phiastX >= 1600){
-      startPuzzle();
-    }
   }
 }
 

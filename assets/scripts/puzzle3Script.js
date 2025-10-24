@@ -7,9 +7,9 @@
 import { GameState } from "/assets/scripts/level.js";
 function nextLevel(){
     console.log("Player has won game");
-    GameState.level = 3; 
-    console.log("Player has advanced to", GameState.level)
-    window.location.href="cutscene3.html";
+    GameState.level = 4; 
+    console.log("Player has advanced to final scene")
+    window.location.href="missionBoard.html";
 }
 
 window.onload = function (){
@@ -21,7 +21,7 @@ window.onload = function (){
 
     //Background image 
     let backgroundImage = new Image(); 
-    backgroundImage.src = "assets/images/town.png"; 
+    backgroundImage.src = "assets/images/churchPuzzletemp.png"; 
 
 
     //OBJECTS 
@@ -338,7 +338,7 @@ window.onload = function (){
             nextLevel();
         }
         // Player didn't find Sheep in time so game is reset
-        else if (looseGame === true && winGame === false){
+        /*else if (looseGame === true && winGame === false){
             setTimeout(() => {
                 //Clearing space
                 context.clearRect(0,0, canvas.width, canvas.height)
@@ -355,7 +355,7 @@ window.onload = function (){
                 context.fillText("Time's up! Try again!", 200, 230);
             }, 500);
             setTimeout(() => location.reload(), 3000); // page is reloaded to reset puzzle  
-        }
+        }*/
     }
 
     window.requestAnimationFrame(gameLoop);

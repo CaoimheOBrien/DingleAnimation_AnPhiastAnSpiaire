@@ -26,15 +26,22 @@ const dialogue2Lines = [
 ];
 
 const dialogue3Lines = [
-    "You'er getting close I can feel it!",
+    "You're getting close I can feel it!",
     "Thanks to Cow and sheep, we know that the culprit Phiast needs to catch is in the church.",
     "We're pretty sure it's St. Cuan! But it can't be. (or could it).",
     "Just like you found Cow and Sheep, you're going to need to search for the shadowy figure.",
-    "You have to find the shadowy figure before they runs away, there will be a timer to remind you.",
+    "You have to find the shadowy figure before they run away, there will be a timer to remind you.",
     "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects.",
     "Ready? Let's go!"
 ];
 
+// When GameState.level == 4 
+const dialogueEndLines = [
+    "IT WAS ST.CUAN!",
+    "Who could've guessed that it was St.Cuan creating all that trouble all along!!",
+    "Well, there's only one thing left to do. After 7 long years on this mission, you need to confront St.Cuan.",
+    "Ready? Let's go!"
+];
 const canvas = document.getElementById("the_canvas")
 const context = canvas.getContext("2d");
 
@@ -55,10 +62,16 @@ let missionBoardCuanImage = new Image();
 missionBoardCuanImage.src = "assets/images/missionBoardCuan.png";
 let missionBoardCuan = new GameObject(missionBoardCuanImage, 30, 170, 700, 450); 
 
+
+let missionBoardEndImage = new Image();
+missionBoardEndImage.src = "assets/images/missionBoardCuanOut.png";
+let missionBoardEnd = new GameObject(missionBoardEndImage, 30, 170, 700, 450); 
+
 //Levels
 let nowLevel1 = false;
 let nowLevel2 = false;
 let nowLevel3 = false; 
+let nowLevel4 = false; // in the final scene 
 
 //Dialogue stuff
 let allowInput = false;
@@ -131,6 +144,29 @@ function draw(){
     if (GameState.level === 3){
         console.log("Drawing level 3"); 
         context.drawImage(missionBoardCuan.spritesheet, missionBoardCuan.x, missionBoardCuan.y, missionBoardCuan.width, missionBoardCuan.height);
+        //dialogue box
+        if (typedText !== "") {
+            context.fillStyle = "rgba(0, 0, 0, 0.8)";
+            context.fillRect(80, 540, 1340, 140);
+            context.strokeStyle = "white";
+            context.lineWidth = 4;
+            context.strokeRect(80, 540, 1340, 140);
+
+            context.fillStyle = "white";
+            context.font = "22px Arial";
+            wrapText(context, typedText, 110, 580, 1220, 28);
+
+            if (allowInput) {
+                context.font = "18px Arial";
+                context.fillText("(Press Enter to continue...)", 1100, 640);
+            }
+        }
+    }
+
+    
+    if (GameState.level === 4){
+        console.log("Drawing Final Scene"); 
+        context.drawImage(missionBoardEnd.spritesheet, missionBoardEnd.x, missionBoardEnd.y, missionBoardEnd.width, missionBoardEnd.height);
         //dialogue box
         if (typedText !== "") {
             context.fillStyle = "rgba(0, 0, 0, 0.8)";
@@ -222,7 +258,7 @@ function advanceDialogue() {
             nowLevel1 = true;
         }
     }
-    else if (GameState.level === 2){
+    if (GameState.level === 2){
         if (isTyping) {
             typedText = dialogue2Lines[currentLineIndex];
             isTyping = false;
@@ -230,9 +266,11 @@ function advanceDialogue() {
             return;
         }
 
+
         allowInput = false;
         currentLineIndex++;
         console.log("Now level is:", GameState.level);
+        console.log("Now2Level is:", nowLevel2);
 
         if (currentLineIndex < dialogue2Lines.length) {
             startTypingLine(dialogue2Lines[currentLineIndex]);
@@ -242,7 +280,8 @@ function advanceDialogue() {
             GameState.level = 2;
         }
     }
-    else if (GameState.level === 3){
+
+    if (GameState.level === 3){
         if (isTyping) {
             typedText = dialogue3Lines[currentLineIndex];
             isTyping = false;
@@ -253,6 +292,8 @@ function advanceDialogue() {
         allowInput = false;
         currentLineIndex++;
         console.log("Now level is:", GameState.level);
+        console.log("Now3Level is:", nowLevel3);
+
 
         if (currentLineIndex < dialogue3Lines.length) {
             startTypingLine(dialogue3Lines[currentLineIndex]);
@@ -260,6 +301,29 @@ function advanceDialogue() {
             typedText = "";
             nowLevel3 = true;
             GameState.level = 3;
+        }
+    }
+
+    if (GameState.level === 4){
+        if (isTyping) {
+            typedText = dialogueEndLines[currentLineIndex];
+            isTyping = false;
+            allowInput = true;
+            return;
+        }
+
+        allowInput = false;
+        currentLineIndex++;
+        console.log("Now level is:", GameState.level);
+        console.log("Now3Level is:", nowLevel4);
+
+
+        if (currentLineIndex < dialogueEndLines.length) {
+            startTypingLine(dialogueEndLines[currentLineIndex]);
+        } else {
+            typedText = "";
+            nowLevel4 = true;
+            GameState.level = 4;
         }
     }
 }
@@ -279,6 +343,9 @@ function restartDialogueLine(level){
     else if (level === 3) {
         startTypingLine(dialogue3Lines[currentLineIndex]);
     }
+    else if (level === 4) {
+        startTypingLine(dialogueEndLines[currentLineIndex]);
+    }
 }
 //--------------------------------------------------------------------------------------------------------------------
 //UPDATE
@@ -294,6 +361,10 @@ function update(){
     else if (GameState.level === 3 && nowLevel3 === true){
         console.log("Moving to next level");
         window.location.href="puzzle3Page.html";
+    }
+    else if (GameState.level === 4 && nowLevel4 === true){
+        console.log("Moving to next level");
+        window.location.href="endscene.html";
     }
 }
 
