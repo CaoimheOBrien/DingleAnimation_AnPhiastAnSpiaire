@@ -39,6 +39,7 @@ const FILES_TO_CACHE =[
     //Icons 
 
     //Images 
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/altar.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/anPhiast.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/AnPhiastFinger.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/AnPhiastHand.png",
@@ -47,12 +48,14 @@ const FILES_TO_CACHE =[
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/bush_Puzzle1.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/cara.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/Chandelier.png",
-    //"/DingleAnimation_AnPhiastAnSpiaire/assets/images/church.png",
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/church.png",
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/church_Puzzle.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/cow.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/decoyCow_Puzzle1.png",
-    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/field2.jpg",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/fieldBG_Puzzle1.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/fieldBG.png",
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/fountain.png",
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/homeBackground.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/LakeCorrailli.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/lamp.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/missionBoardAll.png",
@@ -62,16 +65,13 @@ const FILES_TO_CACHE =[
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/missionBoardCuanOut.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/missionBoardSheep.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/missionBoardSheepOut.png",
-    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/ohiast.png",
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/phiast.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/pot.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/sheep.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/StCuan.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/town.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/tree_Puzzle1.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/well.png",
-
-
-
 
     //Audio -- to be added in full game
 
