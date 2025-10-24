@@ -14,7 +14,7 @@ let townImage = new Image();
 townImage.src = "assets/images/town.png";
 
 let churchImage = new Image();
-churchImage.src = "assets/images/chruchTemporary.jpg";
+churchImage.src = "assets/images/church.png";
 
 //Phiast image
 let phiastImage = new Image();

@@ -14,6 +14,10 @@ document.getElementById('menuBtn').addEventListener('click', function(){
   window.location.href='menu.html';
 })
 
+document.getElementById('3').addEventListener('click', function(){
+  window.location.href='puzzlePage3.html';
+})
+
 
 // Check what level it is.
 import { GameState } from "/assets/scripts/level.js";

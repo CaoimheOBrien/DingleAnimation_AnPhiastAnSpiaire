@@ -21,36 +21,36 @@ window.onload = function (){
 
     //Background image 
     let backgroundImage = new Image(); 
-    backgroundImage.src = "assets/images/churchPuzzletemp.png"; 
+    backgroundImage.src = "assets/images/church_Puzzle.png"; 
 
 
     //OBJECTS 
-    //Lamp
-    let lampImage = new Image(); 
-    lampImage.src = "assets/images/lamp.png"; 
-    let lamp = new GameObject(lampImage, 240, 220, 90, 424); 
+    //chandelier
+    let chandelierImage = new Image(); 
+    chandelierImage.src = "assets/images/chandelier.png"; 
+    let chandelier = new GameObject(chandelierImage, 340, 0, 267, 225); 
 
-    //Well
-    let wellImage = new Image();
-    wellImage.src = "assets/images/well.png"; 
-    let well = new GameObject(wellImage, 500, 290, 319, 320); 
+    //altar
+    let altarImage = new Image();
+    altarImage.src = "assets/images/altar.png"; 
+    let altar = new GameObject(altarImage, 980, 307, 200, 200); 
 
-    //Barrels
-    let barrelsImage = new Image();
-    barrelsImage.src = "assets/images/barrels.png"; 
-    let barrels= new GameObject(barrelsImage, 780, 430, 420, 270);
+    //fountain
+    let fountainImage = new Image();
+    fountainImage.src = "assets/images/fountain.png"; 
+    let fountain= new GameObject(fountainImage, 1180, 430, 250, 220);
 
-    //Sheep that they're looking for
-    let sheepImage =  new Image();
-    sheepImage.src = "assets/images/sheep.png";
-    let sheep = new GameObject(sheepImage, 610, 440, 78.6, 155.5); 
+    //St Cuan (what they're looking for)
+    let StCuanImage =  new Image();
+    StCuanImage.src = "assets/images/StCuan.png";
+    let StCuan = new GameObject(StCuanImage, 970, 300, 180, 220); 
 
     // Timer 
     let timerWidth = 300; 
     let timerHeight = 50; 
     let timerMax = 300;
     let timerVal = 0.5; // where the timer is in the loop for the draw function 
-    let timerLastUpdate = Date.now(); //start of the timer d
+    let timerLastUpdate = Date.now(); //start of the timer 
     let timerSpeed = 30; // make timer go slower
 
     //An Phiast
@@ -106,14 +106,14 @@ window.onload = function (){
 
     //  Colision Global Variables
     let canClick = false;
-    let lampClicked = false;
-    let wellClicked = false;
-    let barrelsClicked = false;
-    let wellSelected = false;
-    let lampSelected = false;
-    let barrelsSelected = false;
-    let sheepSelected = false;
-    let sheepClicked = false;
+    let chandelierClicked = false;
+    let altarClicked = false;
+    let fountainClicked = false;
+    let altarSelected = false;
+    let chandelierSelected = false;
+    let fountainSelected = false;
+    let StCuanSelected = false;
+    let StCuanClicked = false;
     let winGame = false;
     let looseGame = false; 
 
@@ -123,48 +123,48 @@ window.onload = function (){
         let phiastRight = phiastFinger.x+ phiastFinger.width;
         let phiastTop = phiastFinger.y;
 
-        // Has the lamp been clicked?
-        const islampColliding =
-            phiastRight >= lamp.x &&
-            phiastLeft <= lamp.x + lamp.width &&
-            phiastTop >= lamp.y &&
-            phiastTop <= lamp.y +lamp.height;
+        // Has the chandelier been clicked?
+        const ischandelierColliding =
+            phiastRight >= chandelier.x &&
+            phiastLeft <= chandelier.x + chandelier.width &&
+            phiastTop >= chandelier.y &&
+            phiastTop <= chandelier.y +chandelier.height;
 
         
-        lampSelected = islampColliding;
+        chandelierSelected = ischandelierColliding;
 
         // Has the decoy cow been clicked
-        const iswellColliding =
-            phiastRight >= well.x &&
-            phiastLeft <= well.x + well.width &&
-            phiastTop >= well.y &&
-            phiastTop <= well.y + well.height;
+        const isaltarColliding =
+            phiastRight >= altar.x &&
+            phiastLeft <= altar.x + altar.width &&
+            phiastTop >= altar.y &&
+            phiastTop <= altar.y + altar.height;
 
-        wellSelected = iswellColliding;
+        altarSelected = isaltarColliding;
 
-        //Has the Barrelsbeen clicked?
-        const isbarrelsColliding =
-            phiastRight >= barrels.x &&
-            phiastLeft <= barrels.x + barrels.width &&
-            phiastTop >= barrels.y &&
-            phiastTop <= barrels.y + barrels.height;
+        //Has the fountainbeen clicked?
+        const isfountainColliding =
+            phiastRight >= fountain.x &&
+            phiastLeft <= fountain.x + fountain.width &&
+            phiastTop >= fountain.y &&
+            phiastTop <= fountain.y + fountain.height;
 
-        barrelsSelected = isbarrelsColliding;
+        fountainSelected = isfountainColliding;
 
         // Has the real Cow been clicked?
-        const issheepColliding = wellClicked === true &&
-            phiastRight >= sheep.x &&
-            phiastLeft <= sheep.x + sheep.width &&
-            phiastTop >= sheep.y &&
-            phiastTop <= sheep.y + sheep.height;
+        const isStCuanColliding = altarClicked === true &&
+            phiastRight >= StCuan.x &&
+            phiastLeft <= StCuan.x + StCuan.width &&
+            phiastTop >= StCuan.y &&
+            phiastTop <= StCuan.y + StCuan.height;
 
-        sheepSelected = issheepColliding;
+        StCuanSelected = isStCuanColliding;
 
-        if (sheepSelected === true){
-            wellSelected = false;
+        if (StCuanSelected === true){
+            altarSelected = false;
         }
 
-        canClick = lampSelected || wellSelected || barrelsSelected || sheepSelected;
+        canClick = chandelierSelected || altarSelected || fountainSelected || StCuanSelected;
     }
 
 
@@ -179,20 +179,20 @@ window.onload = function (){
         context.drawImage(backgroundImage, 0, 0, 1500, 700);
         
         //Real Cow --> What they are trying to find.
-        if(!sheepClicked && wellClicked){
+        if(!StCuanClicked && altarClicked){
             
         }
-        context.drawImage(sheep.spritesheet, sheep.x, sheep.y, sheep.width, sheep.height);
+        context.drawImage(StCuan.spritesheet, StCuan.x, StCuan.y, StCuan.width, StCuan.height);
 
         //Objects
-        if(!lampClicked){
-            context.drawImage(lamp.spritesheet, lamp.x, lamp.y, lamp.width, lamp.height);
+        if(!chandelierClicked){
+            context.drawImage(chandelier.spritesheet, chandelier.x, chandelier.y, chandelier.width, chandelier.height);
         }
-        if (!wellClicked){
-            context.drawImage(well.spritesheet, well.x, well.y, well.width, well.height);
+        if (!altarClicked){
+            context.drawImage(altar.spritesheet, altar.x, altar.y, altar.width, altar.height);
         }
-        if (!barrelsClicked){
-            context.drawImage(barrels.spritesheet, barrels.x, barrels.y, barrels.width, barrels.height);
+        if (!fountainClicked){
+            context.drawImage(fountain.spritesheet, fountain.x, fountain.y, fountain.width, fountain.height);
         }
         
         //Timer
@@ -204,7 +204,7 @@ window.onload = function (){
 
         // Show when you can click on the objects
         if (canClick){
-            if (lampSelected || wellSelected || barrelsSelected){
+            if (chandelierSelected || altarSelected || fountainSelected){
                 context.fillStyle = "rgba(0, 0, 0, 0.6)";
                 context.fillRect(5, 8, 350, 40);
                 context.strokeStyle = "white";
@@ -215,7 +215,7 @@ window.onload = function (){
                 context.font = "20px Arial";
                 context.fillText("Press Enter to look behind the object", 10, 35);
             }
-            else if (sheepSelected){
+            else if (StCuanSelected){
                 context.fillStyle = "rgba(0, 0, 0, 0.6)";
                 context.fillRect(5, 8, 350, 40);
                 context.strokeStyle = "white";
@@ -224,7 +224,7 @@ window.onload = function (){
 
                 context.fillStyle = "white";
                 context.font = "20px Arial";
-                context.fillText("Press Enter to catch Sheep!", 10, 35);
+                context.fillText("Press Enter to catch StCuan!", 10, 35);
             }
         }
     }
@@ -280,17 +280,17 @@ window.onload = function (){
 
     document.addEventListener("keydown", function(event) {
         if (event.key === "Enter" && canClick === true) {
-            if (lampSelected === true){
-                lampClicked = !lampClicked; // Remove the lamp from the game
+            if (chandelierSelected === true){
+                chandelierClicked = !chandelierClicked; // Remove the chandelier from the game
             }
-            if (wellSelected === true){
-                wellClicked = !wellClicked;
+            if (altarSelected === true){
+                altarClicked = !altarClicked;
             }
-            if (barrelsSelected === true && !sheepSelected){
-                barrelsClicked = !barrelsClicked;
+            if (fountainSelected === true && !StCuanSelected){
+                fountainClicked = !fountainClicked;
             }
-            if (sheepSelected === true){
-                sheepClicked = !sheepClicked;
+            if (StCuanSelected === true){
+                StCuanClicked = !StCuanClicked;
                 winGame = true;
             }
             canClick = false; // Waits until you collide again to click
@@ -337,8 +337,8 @@ window.onload = function (){
             }, 5000);
             nextLevel();
         }
-        // Player didn't find Sheep in time so game is reset
-        /*else if (looseGame === true && winGame === false){
+        // Player didn't find St Cuanin time so game is reset
+        else if (looseGame === true && winGame === false){
             setTimeout(() => {
                 //Clearing space
                 context.clearRect(0,0, canvas.width, canvas.height)
@@ -355,7 +355,7 @@ window.onload = function (){
                 context.fillText("Time's up! Try again!", 200, 230);
             }, 500);
             setTimeout(() => location.reload(), 3000); // page is reloaded to reset puzzle  
-        }*/
+        }
     }
 
     window.requestAnimationFrame(gameLoop);
