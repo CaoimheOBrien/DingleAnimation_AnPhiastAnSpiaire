@@ -1,0 +1,56 @@
+<!--Dingle Animation Game Prototype: An Phiast An Spiaire
+
+    Author: Caoimhe O'Brien, Aoife Leahy and Natalia Ryl 
+    Date: 24/10/2025
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Story Info</title>
+    <link href="assets/style/stylesheet.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="menuButtonDiv">
+        <button id="menuBtn">Home</button>
+    </div>
+    
+    <img src="assets/images/LakeCorrailli.png" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+    
+    <h1 id="Title">"An Phiast, An Spiaire"</h1>
+
+    <div id="story">
+        <p>An Phiast’s story starts far before his legendary fight with St Cuan on Loch Corraillí. You may be wondering; why did An Phiast come out every 7 years, why was he making a 
+            scene in the parish, and the most important question: Is he really a bad guy? Well, what the world didn’t know was that An Phiast was on a secret mission to uncover the 
+            big secret behind why there was so many evil sheep and cattle in Loch Corraillí. <br>
+            
+            <br><br>Before the incident, An Phiast was in the “Division of Farmland Security” who are in charge of making sure all the sheep and cattle in Ireland are good and don’t try to overthrow their farmers. An Phiast’s job was to spend time (around 7 years to get to know the place) in different towns and villages to test if the sheep and cattle are good. 
+            <br><br>One year, An Phiast finds that a particular town has particularly bad sheep and cattle; now it’s his responsibility to find out why. He employs the help of his favourite Leprechaun, Cara, who’s pot at the end of the rainbow seems to be half empty and his temper is shorter than he is.
+            St Cuan is the village’s golden boy, he’s friends with the sheep and cows. He brings a joyous atmosphere to every room or field he enters. 
+            <br><br>But An Phiast knows St Cuan is not who he seems to the villagers; while he has a pretty face, he has an ugly heart. He knows St Cuan has something to do with the increasing 
+            number of evil sheep and cattle. 
+
+            <br><br>In this game you will play as An Phiast as you complete your secret mission! Are you up for an adventure into the sunny seaside town of Dingle?
+        </p>
+    </div>
+
+    <div id="playButtonDiv">
+        <button id="playBtn">Let's play</button>
+    </div>
+
+    <script>    
+        // Goes back to opening screen 
+        document.getElementById('menuBtn').addEventListener('click', function(){
+        window.location.href='index.html';
+        })
+
+        // Goes to the first cutscene --> real start of the game
+        
+        document.getElementById('playBtn').addEventListener('click', function(){
+        window.location.href='cutscene1.html';
+        })
+    </script>
+    </body>
+</html

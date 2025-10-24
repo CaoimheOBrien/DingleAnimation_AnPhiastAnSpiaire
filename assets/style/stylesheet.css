@@ -6,7 +6,7 @@
     Index (opening page)
     Puzzle Page
     Menu Page
-    Cut Scene Page
+    Story Info page
 */
 /*----------------------------------------------------------------------------------------------------------------------------------------------*/
 /*INDEX STYLES*/ 
@@ -16,7 +16,7 @@ html, body {
     height: 100%;
     }
 
-    h1{
+h1{
     padding-top: 2%;
     padding-left: 30%;
     position: fixed;
@@ -35,11 +35,12 @@ html, body {
 button {
     background-color: #348a47;
     color: white;
-    font-size: 60px;
     padding: 10px 20px;
     position: relative; 
     border-color: black;
     cursor: pointer;
+    font-size: 60px;
+
     border-radius: 15px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
@@ -51,8 +52,20 @@ button {
     z-index: 10; 
 }
 
+#menuButtonDiv{
+    padding-top: 2%;
+    padding-left: 2%;
+    position: relative;
+    z-index: 12; 
+    font-size: 30px;
+}
+ 
+#menuBtn{
+    font-size: 30px;
+}
 button:hover {
     background-color: #3ea374;
+    box-shadow: 0px 0px 25px rgba(52, 138, 71, 0.8);
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -61,7 +74,7 @@ button:hover {
     all: unset; /* clears inherited global button styles */
     display: inline-block;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px 60px;
@@ -78,7 +91,51 @@ button:hover {
     transition: all 0.3s ease;
 }
 
-#restart:hover {
+#openingScreenBtn{
+    all: unset; /* clears inherited global button styles */
+    display: inline-block;
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 60px;
+    font-size: 2rem;
+    background-color: #348a47; /* your title green */
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 13;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+
+#storyInfo{
+    all: unset; /* clears inherited global button styles */
+    display: inline-block;
+    position: fixed;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 60px;
+    font-size: 2rem;
+    background-color: #348a47; /* your title green */
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 13;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+
+#restart:hover, #openingScreenBtn:hover, #storyInfo:hover {
     background-color: #3ea374; /* slightly lighter green */
     transform: translate(-50%, -50%) scale(1.05);
     box-shadow: 0px 0px 25px rgba(52, 138, 71, 0.8);
@@ -134,4 +191,65 @@ button:hover {
 #canvasDiv{
     margin-top: 2%;
     margin-left: 10%;
+}
+
+/*----------------------------------------------------------------------------------------------------------------------------------------------*/
+/*STORY INFO PAGE*/
+#Title{
+    all: unset; 
+    margin-left: 32%;
+    position: fixed;
+    text-align: center;
+    font-size: 70px;
+    color: #348a47;
+    font-family: fantasy;
+    text-shadow: 
+        -2px -2px 0 #000000,  
+        2px -2px 0 #000,  
+        -2px  2px 0 #000,  
+        2px  2px 0 #000,
+         0px  0px 3px #000; /* optional blur */
+}
+
+#story{
+    color: rgb(0, 0, 0);
+    background-color: #95f3dce5;
+    padding: 1%; 
+    max-width: 50%;
+    max-height: max-content;
+    margin-top: 8%;
+    margin-left: 25%; 
+    margin-bottom: 1%;
+}
+
+#playBtn{
+    all:unset; 
+    padding: 10%;
+    position: relative;
+    font-size: 30px;
+    z-index: 10; 
+
+    display: inline-block;
+    position: fixed;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px 60px;
+    font-size: 2rem;
+    background-color: #348a47; /* your title green */
+    color: white;
+    border: 3px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    text-align: center;
+    z-index: 13;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+#playBtn:hover{
+    background-color: #3ea374; /* slightly lighter green */
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0px 0px 25px rgba(52, 138, 71, 0.8);
 }

@@ -7,7 +7,11 @@ window.onload = () => {
   }
 
 document.getElementById('startBtn').addEventListener('click', function(){
-  window.location.href='cutscene1.html';
+  window.location.href='storyInfo.html';
+})
+
+document.getElementById('menuBtn').addEventListener('click', function(){
+  window.location.href='menu.html';
 })
 
 

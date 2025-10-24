@@ -12,20 +12,33 @@
 
     <h1>"An Phiast, An Spiaire"</h1>
 
-    <button id="restart">Restart Game</button>
+    <button id="restart">Play Game</button>   
+    <button id="openingScreenBtn">Opening menu</button>
+    <button id="storyInfo">Story Information</button>
+   
     <button id="soundEffects">🔊 Sound Effects: On</button>
 
     <div id="musicControl">
             <label for="musicSlider">Music Volume:</label>
             <input type="range" id="musicSlider" min="0" max="1" step="0.01" value="0.5">
-        </div>
+    </div>
 
     <script>
         // Restart button functionality
         document.getElementById('restart').addEventListener('click', function() {
-        // Redirect to puzzle page
-        window.location.href = 'puzzlePage.html';
+        // Redirect to first cut scene 
+        window.location.href = 'storyInfo.html';
         });
+
+        // Goes back to opening screen
+        document.getElementById('openingScreenBtn').addEventListener('click', function(){
+        window.location.href='index.html';
+        })
+        
+        // Goes to game/ story info
+        document.getElementById('storyInfo').addEventListener('click', function(){
+        window.location.href='storyInfo.html';
+        })
 
         const soundBtn = document.getElementById('soundEffects');
         let soundOn = true;
