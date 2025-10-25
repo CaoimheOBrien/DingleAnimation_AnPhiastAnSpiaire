@@ -236,6 +236,7 @@ button:hover {
 
     display: inline-block;
     left: 50%;
+    width: 20%; 
     transform: translate(-50%, -50%);
     padding: 20px 60px;
     background-color: #348a47; /* your title green */
