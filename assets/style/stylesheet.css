@@ -231,14 +231,13 @@ button:hover {
     all:unset; 
     padding: 10%;
     position: relative;
-    font-size: 30px;
+    font-size: 2rem;
     z-index: 1; 
 
     display: inline-block;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px 60px;
-    font-size: 2rem;
     background-color: #348a47; /* your title green */
     color: white;
     border: 3px solid black;
