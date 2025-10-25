@@ -4,21 +4,21 @@
 // Primary Programmer: Caoimhe O'Brien 
 // Date: 21/10/2025
 
-import { GameState } from "./level.js";
+import { GameState } from "../../level.js";
 console.log("Current Level", GameState.level); 
 
 const dialogue1Lines = [
     "This is An Phaist's secret lair, where he keeps his MISSION BOARD.",
     "Use the Mission Board to see where you are in the mission.",
     "Find where Cow is hiding to learn what she and Sheep are planning.",
-    "You have to find Cow before she runs away, there will be a timer to remind you.",
+    "You have to find Cow before he runs away, there will be a timer to remind you.",
     "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects.",
     "Ready? Let's go!"
 ];
 
 const dialogue2Lines = [
     "Well, Cow was pretty useless.",
-    "Now to find Sheep. She's hiding in the Town Square.",
+    "Now to find Sheep. He's hiding in the Town Square.",
     "Just like you found Cow, you're going to need to search for Sheep.",
     "You have to find Sheep before she runs away, there will be a timer to remind you.",
     "Use your arrow keys (or WASD) to go around the screen and click enter to look behind/select objects.",
@@ -163,7 +163,6 @@ function draw(){
         }
     }
 
-    
     if (GameState.level === 4){
         console.log("Drawing Final Scene"); 
         context.drawImage(missionBoardEnd.spritesheet, missionBoardEnd.x, missionBoardEnd.y, missionBoardEnd.width, missionBoardEnd.height);
@@ -249,7 +248,6 @@ function advanceDialogue() {
 
         allowInput = false;
         currentLineIndex++;
-        console.log("Now level is:", GameState.level);
 
         if (currentLineIndex < dialogue1Lines.length) {
             startTypingLine(dialogue1Lines[currentLineIndex]);
@@ -269,8 +267,6 @@ function advanceDialogue() {
 
         allowInput = false;
         currentLineIndex++;
-        console.log("Now level is:", GameState.level);
-        console.log("Now2Level is:", nowLevel2);
 
         if (currentLineIndex < dialogue2Lines.length) {
             startTypingLine(dialogue2Lines[currentLineIndex]);
@@ -291,9 +287,6 @@ function advanceDialogue() {
 
         allowInput = false;
         currentLineIndex++;
-        console.log("Now level is:", GameState.level);
-        console.log("Now3Level is:", nowLevel3);
-
 
         if (currentLineIndex < dialogue3Lines.length) {
             startTypingLine(dialogue3Lines[currentLineIndex]);
@@ -314,8 +307,6 @@ function advanceDialogue() {
 
         allowInput = false;
         currentLineIndex++;
-        console.log("Now level is:", GameState.level);
-        console.log("Now3Level is:", nowLevel4);
 
 
         if (currentLineIndex < dialogueEndLines.length) {
@@ -360,7 +351,7 @@ function update(){
     }
     else if (GameState.level === 3 && nowLevel3 === true){
         console.log("Moving to next level");
-        window.location.href="puzzle3Page.html";
+        window.location.href="puzzlePage3.html";
     }
     else if (GameState.level === 4 && nowLevel4 === true){
         console.log("Moving to next level");

@@ -242,10 +242,10 @@ function advanceDialogue() {
 }
 
 function startPuzzle() {
-    console.log("Puzzle 3 begins!");
+    console.log("Puzzle ends!");
       setTimeout(() => {
-       window.location.href= "missionBoard.html";
-     }, 2000); 
+      window.location.href= "missionBoard.html";
+    }, 500); 
 
 }
 

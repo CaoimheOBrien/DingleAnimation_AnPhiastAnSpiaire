@@ -1,0 +1,61 @@
+<!-- Dingle Animation Game Prototype: An Phiast An Spiaire
+
+    Author: Caoimhe O'Brien, Aoife Leahy and Natalia Ryl
+    Primary Programmer: Caoimhe O'Brien
+    Date: 25/10/2025
+-->
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <title>End of Game</title>
+    <link href="assets/style/stylesheet.css" rel="stylesheet" text="text/css">
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    </head>
+
+    <body>
+        <div id="menuButtonDiv">
+            <button id="menuBtn">Home</button>
+        </div>
+        <img src="assets/images/LakeCorrailli.png" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+
+        <h1 id="Title">"An Phiast, An Spiaire"</h1>
+
+
+        <div id="endOfGame">
+            <p>And so, after the kind people of Dingle Animation took pity on poor old Phiast, he decided it was just too much work being a spy.
+                So he retired. The next year, he showed up to the Dingle Animation Festival, hoping, dreaming that he could repay them.
+                <br><br>"You know, we could do with a mascot," they said.
+            </p>
+            <p>Phiast blinked, unsure if he’d heard right. A mascot? Him? He’d spent years hiding in the shadows, decoding secret messages, and now
+                they wanted him to stand in front of crowds and smile? But as the laughter of the festival washed over him, he realized it wasn’t
+                such a bad idea.
+            </p>
+            <p>The next  moment, An Phiast found himself plastered on posters and tote bags all over Dingle.For the first time in a long time, An
+                Phiast wasn’t a spy or a mystery, he was family. They didn’t know the spy he had once been, nor the secrets he had carried—but they 
+                didn’t need to. And so, amid laughter, cheers, and the twinkle of festival lights, An Phiast took his place as the mascot of their 
+                hearts. And so, without a single soul knowing the spy he once was, Phiast twirled, bowed, and took his place as the festival’s favorite 
+                oddball hero.
+            </p>
+        </div>
+
+        <div id="endMessage">
+            <p>Want to play this adventure again? Click the button below, or click the menu button in the top left-hand corner of the screen.</p>
+        </div>
+
+        <div id="playButtonDiv">
+            <button id="playBtn">Replay?</button>
+        </div>
+        <script>
+            document.getElementById('homeBtn').addEventListener('click', function(){
+        window.location.href='index.html';
+        })
+
+        document.getElementById('playBtn').addEventListener('click', function(){
+        window.location.href='storyInfo.html';
+        })
+        </script>
+    </body>
+</html>

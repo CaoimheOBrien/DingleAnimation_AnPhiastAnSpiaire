@@ -30,7 +30,7 @@ const FILES_TO_CACHE =[
     "/DingleAnimation_AnPhiastAnSpiaire/assets/scripts/cutscene2.js",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/scripts/cutscene3.js",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/scripts/missionBoard.js",
-    "/DingleAnimation_AnPhiastAnSpiaire/assets/scripts/level.js",
+    "/DingleAnimation_AnPhiastAnSpiaire/level.js",
 
 
     //StyleSheets
@@ -72,9 +72,11 @@ const FILES_TO_CACHE =[
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/town.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/tree_Puzzle1.png",
     "/DingleAnimation_AnPhiastAnSpiaire/assets/images/well.png",
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/favicon.png",
 
-    //Audio -- to be added in full game
-
+    //Audio 
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/sounds/click.mp3",
+    "/DingleAnimation_AnPhiastAnSpiaire/assets/images/theme.mp3",
 ];
 
 // Install event: cache files

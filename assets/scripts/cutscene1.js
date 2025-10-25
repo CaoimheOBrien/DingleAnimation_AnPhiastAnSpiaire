@@ -7,7 +7,7 @@
 const canvas = document.getElementById("the_canvas")
 const context = canvas.getContext("2d");
 
-import { GameState } from "./level.js";
+import { GameState } from "../../level.js";
 
 GameState.level = 1; //Makes sure Game Level is 1 for the first cut scene 
 //--------------------------------------------------------------------------------------------------------------------
@@ -205,7 +205,7 @@ function startPuzzle() {
     console.log("Puzzle 1 begins!");
     setTimeout(() => {
       window.location.href="missionBoard.html";
-    }, 2000);
+    }, 500);
 }
 
 //GAME LOOP

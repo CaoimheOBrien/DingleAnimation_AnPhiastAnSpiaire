@@ -4,7 +4,7 @@
 //  Lead Programmer on feature: Caoimhe O'Brien
 //  Date: 22/10/2025
 
-import { GameState } from "/assets/scripts/level.js";
+import { GameState } from "/../../level.js";
 function nextLevel(){
     console.log("Player has won game");
     GameState.level = 4; 

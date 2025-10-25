@@ -7,7 +7,7 @@
 const canvas = document.getElementById("finalCanvas")
 const context = canvas.getContext("2d");
 
-import { GameState } from "./level.js";
+import { GameState } from "../../level.js";
 
 GameState.level = 4; //Makes sure is on final game level
 //--------------------------------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ const dialogueLines = [
     "An Phiast: Oh now what will I do? Who will help me now? Who are the nicest group of people in all of Dingle?",
     "An Phiast: I know! Dingle Animation Festival! Surely somone there will help me get this pot off my head.",
     "*An Phiast runs to Dingle Animation and someone helps him take off the pot.",
-    "He decides to retire from spy life, living happily ever after as the new Dingle Animation Mascot." // 18
+    "And that's where people thinks the story ends..." // 18
 ];
 
 let currentLineIndex = 0;
@@ -262,6 +262,10 @@ function update() {
       }
     }
 
+    //Goes to End of Game Page
+    if (currentLineIndex === dialogueLines.length - 1 && !isTyping){
+        endOfGame();
+    }
     // Disable input while movement or typing is happening
     allowInput = !moving && !isTyping;
 }
@@ -269,15 +273,6 @@ function update() {
 window.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && allowInput) {
         advanceDialogue();
-    }
-});
-
-
-window.addEventListener("keydown", (s) => {
-    if (s.key === " " || s.code == "Space" && allowInput) {
-      potOnPhiast = true; 
-        currentLineIndex = 14; 
-
     }
 });
 
@@ -301,11 +296,11 @@ function advanceDialogue() {
   }
 }
 
-function startPuzzle() {
-    console.log("Puzzle 1 begins!");
+function endOfGame() {
+    console.log("Go to end game page!");
     setTimeout(() => {
-      window.location.href="missionBoard.html";
-    }, 2000);
+      window.location.href="endPage.html";
+    }, 100);
 }
 
 //GAME LOOP
